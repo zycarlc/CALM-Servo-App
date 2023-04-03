@@ -1,4 +1,4 @@
-
+import { fetchServos } from "../servo_api.js"
 
 // Initialize and add the map
 let map;
@@ -7,30 +7,28 @@ let map;
 
 
 async function initMap() {
-  // The location of Uluru
+  // The location of G.A. Sydney
   const position = { lat: -33.8712, lng: 151.2046 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
-  // The map, centered at Uluru
   map = new Map(document.getElementById("map"), {
     zoom: 13,
     center: position,
-    mapId: "DEMO_MAP_ID",
+    mapId: "SERVO APP",
     minZoom: 10,
   });
 
 
-  axios.get("/api/stations/all")
-  .then(res => res.data.forEach((station) => {
+  fetchServos()
+  .then(res => res.forEach((station) => {
       const marker = new google.maps.Marker({
-        position : {lat:Number(station.latitude), lng:Number(station.longitude)},
+        position : { lat:Number(station.latitude), lng:Number(station.longitude) },
         map,
-    
       })
-    }))
+  }))
 
 
     // const infoWindow = new google.maps.InfoWindow();

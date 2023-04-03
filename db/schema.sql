@@ -13,16 +13,9 @@ create table stations (
 );
 
 
-COPY stations(id, station_description, station_name, station_owner)
+COPY stations(id, station_description, station_name, station_owner, station_address, station_suburb, station_state, latitude, longitude )
 FROM '/Users/Liang/Downloads/stations.csv'
 DELIMITER ','
 CSV HEADER;
 
-
-LOAD DATA INFILE '/Users/Liang/Downloads/stations.csv' 
-INTO TABLE stations 
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS;
 

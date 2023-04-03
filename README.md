@@ -1,6 +1,9 @@
 # CALM-Servo-App
 
 
+
+=======
+
 # What this project is about
 
 - creating a servo app to check your nearest servo
@@ -9,9 +12,10 @@
 
 # Who's in the team
 
-- Mike: insert github profile here
-- Leon: 
+- Mike: https://github.com/mountmike
+- Leon: team member leon is part of the fantastic team to create great project named "station"
 - Carl: 
 - Amal: https://github.com/ggsnipes
 =======
+
 

@@ -3,6 +3,9 @@ import { fetchServos } from "../servo_api.js"
 // Initialize and add the map
 let map;
 
+// Hooking onto the Date class within home.ejs
+let time = document.querySelector('.date')
+
 
 
 
@@ -29,6 +32,7 @@ async function initMap() {
         map,
       })
   }))
+
 
 
     // const infoWindow = new google.maps.InfoWindow();
@@ -58,7 +62,16 @@ async function initMap() {
 //   });
 }
 
+// Setting a time that refreshes the time
+function refreshTime() {
+    const dateString = new Date().toLocaleString();
+    const formattedString = dateString.replace(", ", " - ");
+    time.innerText = formattedString
+}
 
+// refreshes the time every second
+setInterval(refreshTime, 1000)
 
 initMap();
+
 

@@ -12,69 +12,69 @@ let time = document.querySelector('.date')
 
 
 async function initMap() {
-  // The location of G.A. Sydney
-  const position = { lat: -36.358334, lng: 146.312500 };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+    // The location of G.A. Sydney
+    const position = { lat: -36.358334, lng: 146.312500 };
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
-  map = new Map(document.getElementById("map"), {
-    zoom: 13,
-    center: position,
-    mapId: "SERVO APP",
-    minZoom: 10,
-  });
-
-  let labelValue = ""
-  fetchServos()
-  .then(res => res.forEach((station) => {
-      const marker = new google.maps.Marker({
-        position : { lat:Number(station.latitude), lng:Number(station.longitude) },
-        map,
-        label: "",
-        title: `${station.station_address}` 
-      })
-
-  }))
-
-  mapCenterInfo(position.lat, position.lng)
-
-  map.addListener("center_changed", () => {
-    let centerLat = map.getCenter().lat()
-    let centerLon = map.getCenter().lng()
-    mapCenterInfo(centerLat, centerLon)
-  });
-
-
-      const infoWindow = new google.maps.InfoWindow();
-      const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
-
-      marker.addListener("click", () => {
-        infoWindow.close();
-        infoWindow.setContent(contentString);
-        infoWindow.open(marker.getMap(), marker);
-      });
-
-    //   const infoWindow1 = new google.maps.InfoWindow();
-      marker.addListener('mouseover', function() {
-        // infoWindow1.setContent(`<p>${station.station_name}</p>`);
-        // infoWindow1.open(marker.getMap(), marker);
-        marker.set("label", {
-            text: `${station.station_name}`,
-            color: '#000',
-            fontSize:'14px',
-            fontWeight:'bold',
-          })
-        
+    map = new Map(document.getElementById("map"), {
+        zoom: 13,
+        center: position,
+        mapId: "SERVO APP",
+        minZoom: 10,
     });
 
-    marker.addListener('mouseout', function() {
-        marker.set("label", "")
-    });
+    mapCenterInfo(position.lat, position.lng)
 
-    }))
-  }
+
+
+  
+    fetchServos()
+        .then(res => res.forEach((station) => {
+            const marker = new google.maps.Marker({
+                position : { lat:Number(station.latitude), lng:Number(station.longitude) },
+                map,
+                label: "",
+                title: `${station.station_address}` 
+            })
+
+            const infoWindow = new google.maps.InfoWindow();
+            const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
+
+            marker.addListener("click", () => {
+                infoWindow.close();
+                infoWindow.setContent(contentString);
+                infoWindow.open(marker.getMap(), marker);
+            });
+
+            //   const infoWindow1 = new google.maps.InfoWindow();
+            marker.addListener('mouseover', function() {
+                // infoWindow1.setContent(`<p>${station.station_name}</p>`);
+                // infoWindow1.open(marker.getMap(), marker);
+                marker.set("label", {
+                    text: `${station.station_name}`,
+                    color: '#00008B',
+                    fontSize:'14px',
+                    fontWeight:'bold',
+                })
+            
+        });
+
+            marker.addListener('mouseout', function() {
+                marker.set("label", "")
+            });
+
+        }))
+
+    map.addListener("center_changed", () => {
+        let centerLat = map.getCenter().lat()
+        let centerLon = map.getCenter().lng()
+        mapCenterInfo(centerLat, centerLon)
+    });
+}
+
 
 
     

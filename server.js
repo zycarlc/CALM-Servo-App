@@ -17,6 +17,10 @@ app.get("/api/stations/all", (req, res) => {
     Servo.findAll().then(servos => res.json (servos.rows))
 })
 
+app.get("/api/owners", (req, res) => {
+    Servo.findAllOwners().then(servos => res.json(servos))
+})
+
 app.listen(config.port, () => {
     console.log(`listening on port ${config.port}`)
   })

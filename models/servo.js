@@ -2,7 +2,7 @@ const db = require('../db')
 const AppError = require('../lib/app_error')
 
 
-class Note {
+class Servo {
     static  findAll () {
         return db.query("select * from stations;")
     }
@@ -15,6 +15,16 @@ class Note {
                     throw new AppError(404, "recode not found")
                 }
                 return res.rows[0]
+            })
+    }
+
+    static findAllOwners () {
+        return db.query("SELECT DISTINCT station_owner FROM stations;")
+            .then(res => {
+                if (res.rows.length === 0) {
+                    throw new AppError(404, "recode not found")
+                }
+                return res.rows
             })
     }
 
@@ -36,4 +46,4 @@ class Note {
     // }
 }
 
-module.exports = Note
+module.exports = Servo

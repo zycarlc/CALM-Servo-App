@@ -13,4 +13,5 @@ module.exports = {
   db: {
     connectionString: process.env.DATABASE_URL,
   },
+  maps_key: process.env.GOOGLE_MAPS_API_KEY
 }

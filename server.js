@@ -11,7 +11,7 @@ app.use(expressLayouts)
 app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
-    res.render("home")
+    res.render("home", { API_KEY: config.maps_key })
 })
 
 app.listen(config.port, () => {

@@ -1,4 +1,6 @@
+// import axios from "axios";
 import { fetchServos } from "../servo_api.js"
+import { mapCenterInfo } from "./components/map_center.js" ;
 
 // Initialize and add the map
 let map;
@@ -34,6 +36,10 @@ async function initMap() {
   }))
 
 
+  map.addListener("center_changed", () => {
+    let centerPosition = map.getCenter()
+    mapCenterInfo(centerPosition)
+  });
 
     // const infoWindow = new google.maps.InfoWindow();
   

@@ -4,7 +4,7 @@ const AppError = require('../lib/app_error')
 
 class Servo {
     static  findAll () {
-        return db.query("select * from stations;")
+        return db.query("select * from stations limit 400;")
     }
 
     static findOneById (id) {

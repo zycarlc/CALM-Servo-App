@@ -78,3 +78,13 @@ footer {
     transform: scale(0.95);
     transition: all 0.3s;
    }
+
+.labels {
+    color: white;
+    background-color: red;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    text-align: center;
+    width: 30px;
+    white-space: nowrap;
+  }

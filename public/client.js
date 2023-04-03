@@ -13,7 +13,7 @@ let time = document.querySelector('.date')
 
 async function initMap() {
   // The location of G.A. Sydney
-  const position = { lat: -33.8712, lng: 151.2046 };
+  const position = { lat: -36.358334, lng: 146.312500 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
@@ -26,13 +26,16 @@ async function initMap() {
     minZoom: 10,
   });
 
-
+  let labelValue = ""
   fetchServos()
   .then(res => res.forEach((station) => {
       const marker = new google.maps.Marker({
         position : { lat:Number(station.latitude), lng:Number(station.longitude) },
         map,
+        label: "",
+        title: `${station.station_address}` 
       })
+
   }))
 
   mapCenterInfo(position.lat, position.lng)
@@ -43,7 +46,38 @@ async function initMap() {
     mapCenterInfo(centerLat, centerLon)
   });
 
-    // const infoWindow = new google.maps.InfoWindow();
+
+      const infoWindow = new google.maps.InfoWindow();
+      const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
+
+      marker.addListener("click", () => {
+        infoWindow.close();
+        infoWindow.setContent(contentString);
+        infoWindow.open(marker.getMap(), marker);
+      });
+
+    //   const infoWindow1 = new google.maps.InfoWindow();
+      marker.addListener('mouseover', function() {
+        // infoWindow1.setContent(`<p>${station.station_name}</p>`);
+        // infoWindow1.open(marker.getMap(), marker);
+        marker.set("label", {
+            text: `${station.station_name}`,
+            color: '#000',
+            fontSize:'14px',
+            fontWeight:'bold',
+          })
+        
+    });
+
+    marker.addListener('mouseout', function() {
+        marker.set("label", "")
+    });
+
+    }))
+  }
+
+
+    
   
     // Create the markers.
     // tourStops.forEach((stop) => {
@@ -56,11 +90,7 @@ async function initMap() {
     //   });
   
     //   // Add a click listener for each marker, and set up the info window.
-    //   marker.addListener("click", () => {
-    //     infoWindow.close();
-    //     infoWindow.setContent(marker.getTitle());
-    //     infoWindow.open(marker.getMap(), marker);
-    //   });
+      
     // });
 //   // The marker, positioned at Uluru
 //   const marker = new AdvancedMarkerView({
@@ -68,7 +98,7 @@ async function initMap() {
 //     position: position,
 //     title: "Uluru",
 //   });
-}
+
 
 // Setting a time that refreshes the time
 function refreshTime() {

@@ -8,57 +8,51 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js" defer></script>
     <script async
-    src="https://maps.googleapis.com/maps/api/js?key=<%= API_KEY %>&callback=initMap">
-    </script>
+    src="https://maps.googleapis.com/maps/api/js?key=<%= API_KEY %>&callback=initMap" defer></script>
     <script type="module" src="/client.js" defer></script>
 </head>
 <body>
-    
+    <aside>
+        <section class="spotlight">
+            <h3>Spotlight</h3>
+        </section>
+        <section class="stats">
+            <h3>Stats</h3>
+            <p>Current number of Petrol stations: 5244</p>
+        </section>
+        <section class="prices">
+            <h3>Prices</h3>
+        </section>
+        <section class="about">
+            <h3>About</h3>
+            <h5>TEAM CALM</h5>
+            <ul>
+            <li><a href="https://github.com/zycarlc">Carl</a></li>
+            <li><a href="https://github.com/ggsnipes">Amal</a></li>
+            <li><a href="https://github.com/Leon-Liang-YU">Leon</a></li>
+            <li><a href="https://github.com/mountmike">Mike</a></li>
+            </ul>
+            <footer>&copy; 2023 CALM </footer>
 
-
-<aside>
-    <section class="spotlight">
-        <p>spotlight</p>
-    </section>
-    <section class="stats">
-        <p>stats</p>
-        <p>Current number of Petrol stations: 5244</p>
-    </section>
-    <section class="prices">
-        <p>prices</p>
-    </section>
-    <section class="about">
-
-        <h1>About</h1>
-        <h3>Team name: CALM</h3>
-        <h3>Members:</h3>
-        <ul>
-          <li>Carl: <a href="https://github.com/zycarlc">https://github.com/zycarlc</a></li>
-          <li>Leon: <a href="https://github.com/Leon-Liang-YU">https://github.com/Leon-Liang-YU</a></li>
-          <li>Mike: <a href="https://github.com/mountmike">https://github.com/mountmike</a></li>
-          <li>Amal: <a href="https://github.com/ggsnipes">https://github.com/ggsnipes</a></li>
-        </ul>
-        <footer>&copy; 2023 CALM </footer>
-
-    </section>
-</aside>
-<main>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
-</main>
-<aside>
-    <section class="date">
-        <p>date</p>
-    </section>
-    <section class="map-center">
-        <p>map center</p>
-    </section>
-    <section class="nearest">
-        <p>station</p>
-    </section>
-</aside>
-<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-<script type="module" src="/components/servo_list.js"></script>
+        </section>
+    </aside>
+    <main>
+        <!--The div element for the map -->
+        <div id="map"></div>
+    </main>
+    <aside>
+        <section class="date">
+            <h3><%= new Date().toString().slice(0, 21) %></h3>
+        </section>
+        <section class="map-center">
+            <h3>Map center</h3>
+        </section>
+        <section class="nearest">
+            <h3>Nearest</h3>
+            <div class="nearest-results"></div>
+        </section>
+    </aside>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script type="module" src="/components/servo_list.js"></script>
 </body>
 </html>

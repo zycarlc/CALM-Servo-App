@@ -1,19 +1,22 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+
+/* * {
     border: red 1px solid;
-}
+} */
 
 body {
     margin: 0;
     display: flex;
-    min-height: 98dvh;
+    height: 100vh;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Oxygen';
 }
 
 main {
-    flex: 5;
+    flex: 4;
     width: 100%;
-    min-height: 98dvh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,17 +25,45 @@ main {
 
 aside {
     flex: 1;
-    min-height: 98dvh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* section {
-    height: ;
-} */
+section {
+    border: 1px solid grey;
+    padding: 2%;
+    flex-grow: 1;
+}
+
+.nearest {
+    overflow: scroll;
+    padding: 0;
+}
+
+.nearest > h3 {
+    padding: 2%;
+}
 
 #map {
-    height: 98dvh; /* The height is 400 pixels */
+    height: 100vh;
+}
 
+footer {
+    font-size: .7em;
+    position: absolute;
+    bottom: 1%;
+}
+
+/* nearest servo alternating row colours */
+
+.station-list {
+    width: 100%;
+    padding: 2%;
+    background-color: lightgrey;
+}
+
+.station-list:nth-child(2n+1) {
+    background-color: antiquewhite;
 }

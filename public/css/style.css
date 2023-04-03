@@ -14,7 +14,7 @@ body {
 }
 
 main {
-    flex: 4;
+    flex: 5;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -24,7 +24,7 @@ main {
 }
 
 aside {
-    flex: 1;
+    flex: 2;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -32,9 +32,12 @@ aside {
 }
 
 section {
-    border: 1px solid grey;
     padding: 2%;
+    margin: 0 3px 5px 3px;
     flex-grow: 1;
+    background: rgb(236, 236, 236);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 
 .nearest {
@@ -59,11 +62,19 @@ footer {
 /* nearest servo alternating row colours */
 
 .station-list {
-    width: 100%;
+    width: 90%;
     padding: 2%;
-    background-color: lightgrey;
+    margin: 5% 2%;
+    background: #ddddfe;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .station-list:nth-child(2n+1) {
-    background-color: antiquewhite;
+    background: #c8e9d3;
 }
+
+.station-list:hover {
+    transform: scale(0.95);
+    transition: all 0.3s;
+   }

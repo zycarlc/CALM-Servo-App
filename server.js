@@ -1,12 +1,11 @@
 const express = require("express")
 const app = express()
-// const cors = require('cors')
+const cors = require('cors')
 const config = require("./config")
 const Servo = require("./models/servo.js")
 
-
 app.set("view engine", "ejs")
-// app.use(cors())
+
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
 
@@ -24,4 +23,4 @@ app.get("/api/owners", (req, res) => {
 
 app.listen(config.port, () => {
     console.log(`listening on port ${config.port}`)
-  })
+})

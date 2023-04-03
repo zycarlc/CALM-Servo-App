@@ -11,7 +11,7 @@ let time = document.querySelector('.date')
 
 async function initMap() {
   // The location of G.A. Sydney
-  const position = { lat: -33.8712, lng: 151.2046 };
+  const position = { lat: -36.358334, lng: 146.312500 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
@@ -47,7 +47,12 @@ async function initMap() {
       marker.addListener('mouseover', function() {
         // infoWindow1.setContent(`<p>${station.station_name}</p>`);
         // infoWindow1.open(marker.getMap(), marker);
-        marker.set("label", `${station.station_name}`)
+        marker.set("label", {
+            text: `${station.station_name}`,
+            color: '#000',
+            fontSize:'14px',
+            fontWeight:'bold',
+          })
         
     });
 

@@ -8,7 +8,7 @@ let map;
 
 async function initMap() {
   // The location of Uluru
-  const position = { lat: -25.344, lng: 131.031 };
+  const position = { lat: -33.8712, lng: 151.2046 };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
@@ -22,12 +22,18 @@ async function initMap() {
     minZoom: 10,
   });
 
-  console.log("123")
+
   axios.get("/api/stations/all")
-  .then(res => console.log(res.data))
+  .then(res => res.data.forEach((station) => {
+      const marker = new google.maps.Marker({
+        position : {lat:Number(station.latitude), lng:Number(station.longitude)},
+        map,
+    
+      })
+    }))
 
 
-    const infoWindow = new google.maps.InfoWindow();
+    // const infoWindow = new google.maps.InfoWindow();
   
     // Create the markers.
     // tourStops.forEach((stop) => {

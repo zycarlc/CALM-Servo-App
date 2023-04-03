@@ -55,7 +55,7 @@ async function initMap() {
                 // infoWindow1.open(marker.getMap(), marker);
                 marker.set("label", {
                     text: `${station.station_name}`,
-                    color: '#ffe4e1 ',
+                    color: '#00008B',
                     fontSize:'14px',
                     fontWeight:'bold',
                 })

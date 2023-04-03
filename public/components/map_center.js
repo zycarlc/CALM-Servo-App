@@ -1,7 +1,5 @@
 
-export function mapCenterInfo (centerPosition) {
-    const centerLat = centerPosition.lat();
-    const centerLng = centerPosition.lng();
+export function mapCenterInfo (centerLat, centerLng) {
     const mapCenterInfo = document.querySelector('.map-center-info')
     const mapCenterAddress= document.querySelector('.map-center-address')
 

@@ -35,10 +35,12 @@ async function initMap() {
       })
   }))
 
+  mapCenterInfo(position.lat, position.lng)
 
   map.addListener("center_changed", () => {
-    let centerPosition = map.getCenter()
-    mapCenterInfo(centerPosition)
+    let centerLat = map.getCenter().lat()
+    let centerLon = map.getCenter().lng()
+    mapCenterInfo(centerLat, centerLon)
   });
 
     // const infoWindow = new google.maps.InfoWindow();

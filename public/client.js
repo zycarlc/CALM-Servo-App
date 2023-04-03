@@ -26,7 +26,7 @@ async function initMap() {
         minZoom: 10,
     });
 
-    mapCenterInfo(position.lat, position.lng)
+    mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
 
 
 
@@ -56,11 +56,10 @@ async function initMap() {
                 marker.set("label", {
                     text: `${station.station_name}`,
                     color: '#00008B',
-                    fontSize:'14px',
+                    fontSize:'20px',
                     fontWeight:'bold',
-                })
-            
-        });
+                })           
+            });
 
             marker.addListener('mouseout', function() {
                 marker.set("label", "")

@@ -98,4 +98,9 @@ footer {
     text-align: center;
     width: 30px;
     white-space: nowrap;
-  }
+}
+
+table {
+    width: 100%;
+}
+  

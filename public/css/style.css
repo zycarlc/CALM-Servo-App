@@ -23,11 +23,7 @@ main {
 
 }
 
-.collapse-wrapper {
-    position: absolute;
-    right: 7px;
-    z-index: 1;
-}
+
 
 aside {
     flex: 2;
@@ -49,6 +45,31 @@ aside {
     overflow: hidden;
     transition: .5s;
     background: rgb(236, 236, 236);
+    border-right: rgba(128, 128, 128, 0.458) 2px solid;
+}
+
+.collapse-wrapper {
+    position: absolute;
+    right: 7px;
+    z-index: 1;
+}
+
+.right > .collapse-wrapper {
+    left: 7px;
+
+}
+
+.right {
+    position: relative;
+    transition: .5s;
+}
+
+.right-collapsed {
+    flex: .15;
+    overflow: hidden;
+    transition: .5s;
+    background: rgb(236, 236, 236);
+    border-right: rgba(128, 128, 128, 0.458) 2px solid;
 }
 
 section {
@@ -111,6 +132,7 @@ section {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-top: 10px;
 }
 
 #map {
@@ -205,12 +227,12 @@ ul > li:hover {
   transition: .5s;
 }
 
-#collapseBtn {
-
+#leftCollapseBtn, #rightCollapseBtn {
+    color: #7474ff;
 }
 
-#collapseBtn:hover {
-    color: #7474ff;
+#leftCollapseBtn:hover, #rightCollapseBtn:hover {
+    color: #50508e;
     scale: 1.2;
     cursor: pointer;
 }

@@ -42,7 +42,29 @@ section {
     flex-grow: 1;
     background: rgb(236, 236, 236);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
 
+#spotlight-info {
+    margin-bottom: 5px;
+}
+
+#spotlight-info > p {
+    margin: .5rem
+}
+
+.heading-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.heading-wrapper > i, h3 {
+    margin: 5px 0;
+}
+
+.stats {
+    overflow-y: scroll;
 }
 
 .stats-list > p {
@@ -50,13 +72,24 @@ section {
     margin: 2px;
 }
 
+.about {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-middle {
+    display: flex;
+    align-items: center;
+
+}
+
 .nearest {
-    overflow: scroll;
+    overflow-y: scroll;
     padding: 0;
 }
 
-.nearest > h3 {
-    padding: 2%;
+.nearest > .heading-wrapper {
+    margin: 10px;
 }
 
 .date {
@@ -65,22 +98,16 @@ section {
     gap: 10px;
 }
 
-
-
 #map {
     height: 100vh;
 }
 
 footer {
     font-size: .7em;
-    position: absolute;
-    bottom: 1%;
 }
 
-/* nearest servo alternating row colours */
-
 .station-list {
-    width: 90%;
+    max-width: 95%;
     padding: 2%;
     margin: 5% 2%;
     background: #ddddfe;
@@ -113,4 +140,43 @@ table {
 
 td {
     text-align: justify;
+}
+
+i {
+    color: #50508e;
+}
+
+.team-blurb {
+    font-size: .7rem;
+    width: 50%;
+    margin: 0;
+}
+
+.team-blurb > p {
+    margin: 0;
+}
+
+ul {
+    margin: 0 0 10px 0;
+}
+
+ul > li {
+    font-size: .75rem;
+    list-style: none;
+    margin: 4px 0;
+}
+
+ul > li > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul > li:hover {
+  scale: 1.1;
+  transition: .1s;
+}
+
+.fa-github:hover {
+  rotate: 360deg;
+  transition: .5s;
 }

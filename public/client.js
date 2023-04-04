@@ -1,9 +1,10 @@
 // import axios from "axios";
-import { fetchServos } from "../servo_api.js"
+import { fetchServos, fetchServosWithin } from "../servo_api.js"
 import { mapCenterInfo } from "./components/map_center.js" ;
 import { getOilPrice } from "./components/Oil_price.js";
 import { getUserLocation } from "./components/get_user_location.js"
 import { spotlight } from "./components/spotlight_init.js";
+
 
 
 
@@ -78,48 +79,48 @@ async function initMap() {
     }
 
 
-    fetchServos()
-        .then(res => res.forEach((station) => {
+    // fetchServos()
+    //     .then(res => res.forEach((station) => {
 
             
-            if(!icons[station.station_owner]){
-                station.station_owner = "Default"
-            }
+    //         if(!icons[station.station_owner]){
+    //             station.station_owner = "Default"
+    //         }
 
-            const marker = new google.maps.Marker({
-                position : { lat:Number(station.latitude), lng:Number(station.longitude) },
-                map,
-                icon: icons[station.station_owner].icon,
-                label: "",
-                title: `${station.station_address}` 
-            })
+    //         const marker = new google.maps.Marker({
+    //             position : { lat:Number(station.latitude), lng:Number(station.longitude) },
+    //             map,
+    //             icon: icons[station.station_owner].icon,
+    //             label: "",
+    //             title: `${station.station_address}` 
+    //         })
             
-            const infoWindow = new google.maps.InfoWindow();
-            const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
+    //         const infoWindow = new google.maps.InfoWindow();
+    //         const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
 
-            marker.addListener("click", () => {
-                infoWindow.close();
-                infoWindow.setContent(contentString);
-                infoWindow.open(marker.getMap(), marker);
-            });
+    //         marker.addListener("click", () => {
+    //             infoWindow.close();
+    //             infoWindow.setContent(contentString);
+    //             infoWindow.open(marker.getMap(), marker);
+    //         });
 
-            //   const infoWindow1 = new google.maps.InfoWindow();
-            marker.addListener('mouseover', function() {
-                // infoWindow1.setContent(`<p>${station.station_name}</p>`);
-                // infoWindow1.open(marker.getMap(), marker);
-                marker.set("label", {
-                    text: `${station.station_name}`,
-                    color: '#00008B',
-                    fontSize:'20px',
-                    fontWeight:'bold',
-                })           
-            });
+    //         //   const infoWindow1 = new google.maps.InfoWindow();
+    //         marker.addListener('mouseover', function() {
+    //             // infoWindow1.setContent(`<p>${station.station_name}</p>`);
+    //             // infoWindow1.open(marker.getMap(), marker);
+    //             marker.set("label", {
+    //                 text: `${station.station_name}`,
+    //                 color: '#00008B',
+    //                 fontSize:'20px',
+    //                 fontWeight:'bold',
+    //             })           
+    //         });
 
-            marker.addListener('mouseout', function() {
-                marker.set("label", "")
-            });
+    //         marker.addListener('mouseout', function() {
+    //             marker.set("label", "")
+    //         });
 
-        }))
+    //     }))
 
     map.addListener("center_changed", () => {
     let centerLat = map.getCenter().lat()
@@ -142,9 +143,49 @@ async function initMap() {
         const lngNE =  northEast.lng()
         const latSW =  southWest.lat()
         const lngSW =  southWest.lng()
-        axios.post("/api/stations/bounds",  { latNE, lngNE, latSW, lngSW })
-            .then(res => console.log(res.data))
+        fetchServosWithin({ latNE, lngNE, latSW, lngSW })
+            // .then(res => console.log(res))
+            .then(res => res.forEach((station) => {
 
+            
+                if(!icons[station.station_owner]){
+                    station.station_owner = "Default"
+                }
+    
+                const marker = new google.maps.Marker({
+                    position : { lat:Number(station.latitude), lng:Number(station.longitude) },
+                    map,
+                    icon: icons[station.station_owner].icon,
+                    label: "",
+                    title: `${station.station_address}` 
+                })
+                
+                const infoWindow = new google.maps.InfoWindow();
+                const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
+    
+                marker.addListener("click", () => {
+                    infoWindow.close();
+                    infoWindow.setContent(contentString);
+                    infoWindow.open(marker.getMap(), marker);
+                });
+    
+                //   const infoWindow1 = new google.maps.InfoWindow();
+                marker.addListener('mouseover', function() {
+                    // infoWindow1.setContent(`<p>${station.station_name}</p>`);
+                    // infoWindow1.open(marker.getMap(), marker);
+                    marker.set("label", {
+                        text: `${station.station_name}`,
+                        color: '#00008B',
+                        fontSize:'20px',
+                        fontWeight:'bold',
+                    })           
+                });
+    
+                marker.addListener('mouseout', function() {
+                    marker.set("label", "")
+                });
+    
+            }))
     })
 }
     

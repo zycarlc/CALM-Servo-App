@@ -12,3 +12,8 @@ export function findOneRandomly () {
 export function fetchServoStats() {
     return axios.get("/api/stats").then(res => res.data)
 }
+
+export function fetchServosWithin (coordinate) {
+    return axios.post("/api/stations/bounds",  coordinate )
+        .then(res => res.data)
+}

@@ -54,15 +54,46 @@ async function initMap() {
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
     getOilPrice()
     spotlight()
-  
+    
+
+    const icons = {
+        "BP": {
+          icon: "/icons/BP.png"
+        },
+        "Caltex": {
+            icon: "/icons/caltex.png"
+          },
+        "7-Eleven Pty Ltd": {
+            icon: "/icons/seven11.png"
+          },
+        "Shell": {
+            icon: "/icons/shell.png"
+          },
+        "United": {
+            icon: "/icons/united.png"
+          },
+        "Default": {
+            icon: "/icons/default.png"
+        }
+    }
+
+
     fetchServos()
         .then(res => res.forEach((station) => {
+
+            
+            if(!icons[station.station_owner]){
+                station.station_owner = "Default"
+            }
+
             const marker = new google.maps.Marker({
                 position : { lat:Number(station.latitude), lng:Number(station.longitude) },
                 map,
+                icon: icons[station.station_owner].icon,
                 label: "",
                 title: `${station.station_address}` 
             })
+            
             const infoWindow = new google.maps.InfoWindow();
             const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
 

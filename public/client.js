@@ -2,6 +2,7 @@
 import { fetchServos } from "../servo_api.js"
 import { mapCenterInfo } from "./components/map_center.js" ;
 import { getOilPrice } from "./components/Oil_price.js";
+import { getUserLocation } from "./components/get_user_location.js"
 
 
 
@@ -19,23 +20,35 @@ let time = document.querySelector('.date')
 async function initMap() {
     // The location of G.A. Sydney
     const position = { lat: -36.358334, lng: 146.312500 };
+    // const position = {};
+ 
     // Request needed libraries.
     //@ts-ignore
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
+            
+            
     map = new Map(document.getElementById("map"), {
         zoom: 13,
         center: position,
         mapId: "SERVO APP",
         minZoom: 10,
-    });
+    })
+
+    getUserLocation()
+    .then(res => {
+        if (res.error) {
+            return position
+        }
+        position.lat = Number(res.lat)
+        position.lng = Number(res.lng)
+        return {lat: res.lat, lng: res.lng}
+    })
+    .then(res => map.setCenter(res))
 
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
     getOilPrice()
-
-
-
   
     fetchServos()
         .then(res => res.forEach((station) => {

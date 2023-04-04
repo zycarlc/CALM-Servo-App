@@ -6,9 +6,55 @@ import { getUserLocation } from "./components/get_user_location.js"
 import { spotlight } from "./components/spotlight_init.js";
 
 
+const leftAside = document.querySelector(".left")
+const leftAsideChildren = leftAside.querySelectorAll("section")
+const leftCollapseBtn = document.querySelector("#leftCollapseBtn")
+leftCollapseBtn.addEventListener("click", handleLeftCollapse)
+let leftIsCollapsed = false;
 
+function handleLeftCollapse(event) {
+    if (!leftIsCollapsed) {
+        leftAsideChildren.forEach(child => {
+            child.style.visibility = "hidden"
+        })
+        leftIsCollapsed = !leftIsCollapsed
+        leftAside.classList.add("left-collapsed")
+        leftCollapseBtn.className = "fa-solid fa-circle-chevron-right"
+    } else {
+        leftAsideChildren.forEach(child => {
+            child.style.visibility = "visible"
+        })
+        leftIsCollapsed = !leftIsCollapsed
+        leftAside.classList.remove("left-collapsed")
+        leftCollapseBtn.className = "fa-solid fa-circle-chevron-left"
+    }
+    
+}
 
+const rightAside = document.querySelector(".right")
+const rightAsideChildren = rightAside.querySelectorAll("section")
+const rightCollapseBtn = document.querySelector("#rightCollapseBtn")
+rightCollapseBtn.addEventListener("click", handleRightCollapse)
+let rightIsCollapsed = false;
 
+function handleRightCollapse(event) {
+    if (!rightIsCollapsed) {
+        rightAsideChildren.forEach(child => {
+            child.style.visibility = "hidden"
+        })
+        rightIsCollapsed = !rightIsCollapsed
+        rightAside.classList.add("right-collapsed")
+        rightCollapseBtn.className = "fa-solid fa-circle-chevron-left"
+    } else {
+        rightAsideChildren.forEach(child => {
+            child.style.visibility = "visible"
+        })
+        rightIsCollapsed = !rightIsCollapsed
+        rightAside.classList.remove("right-collapsed")
+        rightCollapseBtn.className = "fa-solid fa-circle-chevron-right"
+    }
+    
+}
 
 
 // Initialize and add the map
@@ -16,8 +62,6 @@ let map;
 
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('#timeOutput')
-
-
 
 
 

@@ -3,6 +3,8 @@ import { fetchServos } from "../servo_api.js"
 import { mapCenterInfo } from "./components/map_center.js" ;
 import { getOilPrice } from "./components/Oil_price.js";
 import { getUserLocation } from "./components/get_user_location.js"
+import { spotlight } from "./components/spotlight_init.js";
+
 
 
 
@@ -13,6 +15,8 @@ let map;
 
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('.date')
+
+
 
 
 
@@ -49,6 +53,7 @@ async function initMap() {
 
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
     getOilPrice()
+    spotlight()
   
     fetchServos()
         .then(res => res.forEach((station) => {
@@ -98,6 +103,8 @@ async function initMap() {
         map.addListener("zoom_changed", () => {
             fetchServos()
         })
+
+        
         
 }
 
@@ -123,6 +130,10 @@ async function initMap() {
 //     title: "Uluru",
 //   });
 
+// fetch data from db and display in spotlight box
+const spotlightRefresh = document.getElementById("refresh-spot")
+
+spotlightRefresh.addEventListener("click",spotlight)
 
 // Setting a time that refreshes the time
 function refreshTime() {

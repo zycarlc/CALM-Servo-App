@@ -13,30 +13,45 @@
 <body>
     <aside class="left">
         <section class="spotlight">
-            <h3>Spotlight</h3>
+            <div class="heading-wrapper">
+                <i class="fa-solid fa-gas-pump fa-lg"></i>
+                <h3>Spotlight</h3>
+            </div>
             <div id="spotlight-info"></div>
             <a href="" id="refresh-spot">refresh</a>
         </section>
         <section class="stats">
-            <h3>Stats</h3>
-
+            <div class="heading-wrapper">
+                <i class="fa-solid fa-signal"></i>
+            </div>
         </section>
         <section class="prices">
-            <h3>Prices</h3>
+            <div class="heading-wrapper">
+                <i class="fa-solid fa-dollar-sign fa-lg"></i>
+                <h3>Prices</h3>
+            </div>
             <div id="oilPriceDate"></div>
             <div id="wti-oil"></div>
             <div id="brent-oil"></div>
             <div id="naturl-gas"></div>
         </section>
         <section class="about">
-            <h3>About</h3>
-            <h5>TEAM CALM</h5>
-            <ul>
-            <li><a href="https://github.com/zycarlc">Carl</a></li>
-            <li><a href="https://github.com/ggsnipes">Amal</a></li>
-            <li><a href="https://github.com/Leon-Liang-YU">Leon</a></li>
-            <li><a href="https://github.com/mountmike">Mike</a></li>
-            </ul>
+            <div class="heading-wrapper">
+                <i class="fa-regular fa-address-card fa-lg"></i>
+                <h3>About</h3>
+            </div>
+            <div class="about-middle">
+                <div class="team-blurb">
+                    <p>A full stack group project from 4 students as part of General Assembly's Software Engineering Imersive program.
+                    </p>
+                </div>
+                <ul>
+                    <li><a href="https://github.com/zycarlc"><i class='fa fa-github'></i> Carl</a></li>
+                    <li><a href="https://github.com/ggsnipes"><i class='fa fa-github'></i> Amal</a></li>
+                    <li><a href="https://github.com/Leon-Liang-YU"><i class='fa fa-github'></i> Leon</a></li>
+                    <li><a href="https://github.com/mountmike"><i class='fa fa-github'></i> Mike</a></li>
+                </ul>
+            </div>
             <footer>&copy; 2023 CALM </footer>
 
         </section>
@@ -52,14 +67,17 @@
         </section>
         <section class="map-center">
             <div class="heading-wrapper">
-                <h3>Map Center</h3>
                 <i class="fa-solid fa-location-crosshairs fa-lg"></i>
+                <h3>Map Center</h3>
             </div>
             <div class="map-center-info"></div>
             <div class="map-center-address"></div>
         </section>
         <section class="nearest">
-            <h3>Nearest</h3>
+            <div class="heading-wrapper">
+                <i class="fa-solid fa-location-dot fa-lg"></i>
+                <h3>Nearest</h3>
+            </div>
             <div class="nearest-results"></div>
         </section>
     </aside>

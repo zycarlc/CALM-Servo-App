@@ -60,6 +60,7 @@ async function initMap() {
             const marker = new google.maps.Marker({
                 position : { lat:Number(station.latitude), lng:Number(station.longitude) },
                 map,
+                icon: icons[features[i].type].icon,
                 label: "",
                 title: `${station.station_address}` 
             })

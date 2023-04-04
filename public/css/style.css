@@ -136,10 +136,19 @@ footer {
 
 table {
     width: 100%;
+    margin: 5px 0;
+    border-collapse: collapse;
 }
+
+tr:last-child {
+    border-bottom: none;
+   }
 
 td {
     text-align: justify;
+    font-weight: 300;
+    border: grey 1px solid;
+    padding: 2%;
 }
 
 i {

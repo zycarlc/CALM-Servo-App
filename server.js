@@ -21,6 +21,10 @@ app.get("/api/owners", (req, res) => {
     Servo.findAllOwners().then(servos => res.json(servos))
 })
 
+app.get("/api/stations/random", (req, res) => {
+    Servo.findOneRandomly().then(randomServo => res.json(randomServo))
+})
+
 app.listen(config.port, () => {
     console.log(`listening on port ${config.port}`)
 })

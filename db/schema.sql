@@ -19,3 +19,6 @@ DELIMITER ','
 CSV HEADER;
 
 
+CREATE EXTENSION tsm_system_rows ;
+
+SELECT * FROM stations TABLESAMPLE system_rows(1);

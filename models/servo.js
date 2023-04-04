@@ -28,6 +28,11 @@ class Servo {
             })
     }
 
+    static findOneRandomly () {
+        return db.query("SELECT * FROM stations TABLESAMPLE system_rows(1);")
+            .then(res => res.rows[0])
+    }
+
     // static create (newNote) {
     //     let sql = `insert into stations (content, content_html, color) values ($1, $2, $3) returning *;`
     //     return db.query(sql, [

@@ -1,6 +1,7 @@
 // import axios from "axios";
 import { fetchServos } from "../servo_api.js"
 import { mapCenterInfo } from "./components/map_center.js" ;
+import { getOilPrice } from "./components/Oil_price.js";
 
 // Initialize and add the map
 let map;
@@ -27,6 +28,7 @@ async function initMap() {
     });
 
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
+    getOilPrice()
 
 
 

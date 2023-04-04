@@ -146,12 +146,11 @@ async function initMap() {
         fetchServosWithin({ latNE, lngNE, latSW, lngSW })
             // .then(res => console.log(res))
             .then(res => res.forEach((station) => {
-
-            
+                // if the owner is not a big one
                 if(!icons[station.station_owner]){
                     station.station_owner = "Default"
                 }
-    
+                
                 const marker = new google.maps.Marker({
                     position : { lat:Number(station.latitude), lng:Number(station.longitude) },
                     map,

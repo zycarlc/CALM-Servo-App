@@ -14,7 +14,7 @@ import { spotlight } from "./components/spotlight_init.js";
 let map;
 
 // Hooking onto the Date class within home.ejs
-let time = document.querySelector('.date')
+let time = document.querySelector('#timeOutput')
 
 
 

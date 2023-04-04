@@ -29,11 +29,16 @@ aside {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: lightgray;
+}
+
+.left {
+    /* flex: .5; */
 }
 
 section {
     padding: 2%;
-    margin: 0 3px 5px 3px;
+    margin: 0 3px 3px 3px;
     flex-grow: 1;
     background: rgb(236, 236, 236);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -47,6 +52,12 @@ section {
 
 .nearest > h3 {
     padding: 2%;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #map {

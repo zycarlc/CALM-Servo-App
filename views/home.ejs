@@ -7,10 +7,11 @@
     <title>CALM SERVO APP</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/57a970835f.js" crossorigin="anonymous"></script>
     <script type="module" src="/client.js" defer></script>
 </head>
 <body>
-    <aside>
+    <aside class="left">
         <section class="spotlight">
             <h3>Spotlight</h3>
             <div id="spotlight-info"></div>
@@ -44,12 +45,16 @@
         <!--The div element for the map -->
         <div id="map"></div>
     </main>
-    <aside>
+    <aside class="right">
         <section class="date">
-            <h3>Date</h3>
+            <i class="fa-regular fa-clock fa-lg"> </i>
+            <p id="timeOutput"></p>
         </section>
         <section class="map-center">
-            <h3>Map center</h3>
+            <div class="heading-wrapper">
+                <h3>Map Center</h3>
+                <i class="fa-solid fa-location-crosshairs fa-lg"></i>
+            </div>
             <div class="map-center-info"></div>
             <div class="map-center-address"></div>
         </section>

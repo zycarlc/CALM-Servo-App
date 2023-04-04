@@ -3,6 +3,10 @@ import { fetchServos } from "../servo_api.js"
 import { mapCenterInfo } from "./components/map_center.js" ;
 import { getOilPrice } from "./components/Oil_price.js";
 
+
+
+
+
 // Initialize and add the map
 let map;
 
@@ -41,7 +45,6 @@ async function initMap() {
                 label: "",
                 title: `${station.station_address}` 
             })
-
             const infoWindow = new google.maps.InfoWindow();
             const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
 
@@ -69,14 +72,21 @@ async function initMap() {
 
         }))
 
-    map.addListener("center_changed", () => {
+        map.addListener("center_changed", () => {
         let centerLat = map.getCenter().lat()
         let centerLon = map.getCenter().lng()
         mapCenterInfo(centerLat, centerLon)
-    });
+        });
+
+        map.addListener("mouseup", () => {
+            fetchServos()
+        })
+
+        map.addListener("zoom_changed", () => {
+            fetchServos()
+        })
+        
 }
-
-
 
     
   

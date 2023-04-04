@@ -54,13 +54,21 @@ async function initMap() {
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
     getOilPrice()
     spotlight()
-  
+    
+
+    const icons = {
+        BP: {
+          icon: "/icons/BP.png"
+        }
+    }
+
+
     fetchServos()
         .then(res => res.forEach((station) => {
             const marker = new google.maps.Marker({
                 position : { lat:Number(station.latitude), lng:Number(station.longitude) },
                 map,
-                icon: icons[features[i].type].icon,
+                icon: icons[station.station_owner].icon,
                 label: "",
                 title: `${station.station_address}` 
             })

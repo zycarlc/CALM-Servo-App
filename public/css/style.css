@@ -33,13 +33,7 @@ aside {
 }
 
 .left {
-    position: fixed;
-    z-index: 1; 
-    top: 0;
-    left: 0;
-    overflow-x: hidden; 
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+    /* flex: .5; */
 }
 
 section {
@@ -58,6 +52,12 @@ section {
 
 .nearest > h3 {
     padding: 2%;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #map {

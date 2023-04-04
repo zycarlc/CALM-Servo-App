@@ -12,7 +12,7 @@ import { getUserLocation } from "./components/get_user_location.js"
 let map;
 
 // Hooking onto the Date class within home.ejs
-let time = document.querySelector('.date')
+let time = document.querySelector('#timeOutput')
 
 
 

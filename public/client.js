@@ -121,24 +121,32 @@ async function initMap() {
 
         }))
 
-        map.addListener("center_changed", () => {
-        let centerLat = map.getCenter().lat()
-        let centerLon = map.getCenter().lng()
-        mapCenterInfo(centerLat, centerLon)
-        });
+    map.addListener("center_changed", () => {
+    let centerLat = map.getCenter().lat()
+    let centerLon = map.getCenter().lng()
+    mapCenterInfo(centerLat, centerLon)
+    });
 
-        map.addListener("mouseup", () => {
-            fetchServos()
-        })
+    map.addListener("mouseup", () => {
+        fetchServos()
+    })
 
-        map.addListener("zoom_changed", () => {
-            fetchServos()
-        })
+    map.addListener("zoom_changed", () => {
+        fetchServos()
+    })
 
-        
-        
+    map.addListener('bounds_changed', function() {
+        const northEast = map.getBounds().getNorthEast()
+        const southWest = map.getBounds().getSouthWest()
+        const latNE =  northEast.lat()
+        const lngNE =  northEast.lng()
+        const latSW =  southWest.lat()
+        const lngSW =  southWest.lng()
+        axios.post("/api/stations/bounds",  { latNE, lngNE, latSW, lngSW })
+            .then(res => console.log(res.data))
+
+    })
 }
-
     
   
     // Create the markers.
@@ -177,5 +185,3 @@ function refreshTime() {
 setInterval(refreshTime, 1000)
 
 initMap();
-
-

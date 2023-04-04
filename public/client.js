@@ -6,9 +6,30 @@ import { getUserLocation } from "./components/get_user_location.js"
 import { spotlight } from "./components/spotlight_init.js";
 
 
+const leftAside = document.querySelector(".left")
+const leftAsideChildren = leftAside.querySelectorAll("section")
+const collapseBtn = document.querySelector("#collapseBtn")
+collapseBtn.addEventListener("click", handleCollapse)
+let leftIsCollapsed = false;
 
-
-
+function handleCollapse(event) {
+    if (!leftIsCollapsed) {
+        leftAsideChildren.forEach(child => {
+            child.style.visibility = "hidden"
+        })
+        leftIsCollapsed = !leftIsCollapsed
+        leftAside.classList.add("left-collapsed")
+        collapseBtn.className = "fa-solid fa-circle-chevron-right"
+    } else {
+        leftAsideChildren.forEach(child => {
+            child.style.visibility = "visible"
+        })
+        leftIsCollapsed = !leftIsCollapsed
+        leftAside.classList.remove("left-collapsed")
+        collapseBtn.className = "fa-solid fa-circle-chevron-left"
+    }
+    
+}
 
 
 // Initialize and add the map
@@ -16,8 +37,6 @@ let map;
 
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('#timeOutput')
-
-
 
 
 

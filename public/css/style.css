@@ -23,6 +23,12 @@ main {
 
 }
 
+.collapse-wrapper {
+    position: absolute;
+    right: 7px;
+    z-index: 1;
+}
+
 aside {
     flex: 2;
     height: 100vh;
@@ -30,14 +36,19 @@ aside {
     flex-direction: column;
     justify-content: space-between;
     background-color: lightgray;
+    
 }
 
 .left {
-    /* flex: .5; */
+    position: relative;
+    transition: .5s;
 }
 
 .left-collapsed {
-    flex: .1;
+    flex: .15;
+    overflow: hidden;
+    transition: .5s;
+    background: rgb(236, 236, 236);
 }
 
 section {
@@ -192,4 +203,14 @@ ul > li:hover {
 .fa-github:hover {
   rotate: 360deg;
   transition: .5s;
+}
+
+#collapseBtn {
+
+}
+
+#collapseBtn:hover {
+    color: #7474ff;
+    scale: 1.2;
+    cursor: pointer;
 }

@@ -33,6 +33,36 @@ class Servo {
             .then(res => res.rows[0])
     }
 
+    static getStats () {
+        let stationOwners = []
+        let total_owners;
+        let total_stations;
+        return this.findAllOwners()
+            .then(owners => {
+                total_owners = owners.length
+                return owners.map(row => row.station_owner)
+            })
+            .then(owners => {
+                owners.forEach(owner => {
+                    stationOwners.push(db.query(`SELECT COUNT(station_owner) FROM stations WHERE station_owner = '${owner}'`)
+                    .then(res => {
+                        return { owner, "total": res.rows[0].count }
+                        })
+                    )
+                })
+                return Promise.all(stationOwners)
+            })
+            .then(res => {
+                total_stations = res.reduce((acc, owner) => acc + Number(owner.total), 0)
+                return {
+                    owners: res.filter(station => station.total > 1)
+                                .sort((a, b) => b.total - a.total),
+                    total_owners,
+                    total_stations
+                }
+            })
+    }
+
     // static create (newNote) {
     //     let sql = `insert into stations (content, content_html, color) values ($1, $2, $3) returning *;`
     //     return db.query(sql, [

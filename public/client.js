@@ -63,16 +63,16 @@ async function initMap() {
         },
         "Caltex": {
             icon: "/icons/caltex.png"
-          },
+        },
         "7-Eleven Pty Ltd": {
             icon: "/icons/seven11.png"
-          },
+        },
         "Shell": {
             icon: "/icons/shell.png"
-          },
+        },
         "United": {
             icon: "/icons/united.png"
-          },
+        },
         "Default": {
             icon: "/icons/default.png"
         }

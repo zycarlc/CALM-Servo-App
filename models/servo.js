@@ -7,6 +7,14 @@ class Servo {
         return db.query("select * from stations;")
     }
 
+    static findWithinRadius(coords, radius){
+        let degree = radius / 110000
+
+        const sql = `SELECT * FROM stations where ((latitude - coord.lat) * (latitude - coord.lat) + (longitude - coords.lng) * (longitude - coords.lng)) < degree * degree`
+
+
+    }
+
     static findOneById (id) {
         let sql = "select * from stations where id = $1"
         return db.query(sql, [id])

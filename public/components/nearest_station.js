@@ -1,11 +1,15 @@
 import { getDistanceFromLatLon } from "./distance_to_map_center.js";
 import { renderServoList } from "./servo_list.js";
 import { fetchServos } from "../servo_api.js"
+import { setCenterExport } from "../client.js"
+
+
+
 
 
 export function nearestList(centerLat, centerLon){
-    
-let totalStationArr = []
+
+    let totalStationArr = []
     let outputArr = []
 
     fetchServos()
@@ -20,7 +24,7 @@ let totalStationArr = []
 
             let pairArr = []
             
-            pairArr.push(distanceToCenter, station.station_owner, station.station_name, station.station_address)
+            pairArr.push(distanceToCenter, station.station_owner, station.station_name, station.station_address, station.latitude, station.longitude)
 
             distanceArr.push(distanceToCenter)
 
@@ -41,8 +45,20 @@ let totalStationArr = []
         return outputArr
     })
     .then(res =>renderServoList(res))
-    .then(()=>{
-        outputArr.splice(0, 10)
-    })
+    .then(() => outputArr.splice(0, 10))
+    .then(() => {
+        // hook onto each of the nearest stations
+        const nearestDirect = document.querySelectorAll(".nearest-station-name")
 
+        // adding the event listener to setting the map into the center
+        nearestDirect.forEach((station) => {
+            station.addEventListener("click", (event) => {
+                if (event) {
+                    event.preventDefault()
+                }
+                console.log(event.target.dataset)
+                setCenterExport(event.target.dataset)
+            })
+        })
+    })
 }

@@ -36,8 +36,7 @@ app.post("/api/stations/bounds", (req, res) => {
 })
 
 app.post("/api/stations/nearest", (req, res) => {
-    const { radius } = req.body
-    const { center } = req.body
+    const { radius, center } = req.body
     Servo.findWithinRadius(center, radius).then(servos => res.json(servos))
 })
 

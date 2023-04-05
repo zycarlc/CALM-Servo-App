@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { fetchServos, fetchServosWithin } from "../servo_api.js"
+import { fetchServos, fetchServosWithin, fetchServosWithinRadius } from "../servo_api.js"
 import { mapCenterInfo } from "./components/map_center.js" ;
 import { getOilPrice } from "./components/Oil_price.js";
 import { getUserLocation } from "./components/get_user_location.js"
@@ -10,6 +10,8 @@ import { nearestList } from "./components/nearest_station.js";
 // import { renderServoList } from "./components/servo_list.js";
 // import { fetchServos } from "../servo_api"
 
+
+// Left aside DOM variables
 const leftAside = document.querySelector(".left")
 const leftAsideChildren = leftAside.querySelectorAll("section")
 const leftCollapseBtn = document.querySelector("#leftCollapseBtn")
@@ -35,6 +37,7 @@ function handleLeftCollapse(event) {
     
 }
 
+// Right aside DOM variables
 const rightAside = document.querySelector(".right")
 const rightAsideChildren = rightAside.querySelectorAll("section")
 const rightCollapseBtn = document.querySelector("#rightCollapseBtn")
@@ -67,6 +70,8 @@ function handleRightCollapse(event) {
     
 }
 
+
+
 // Initialize and add the map
 let map;
 
@@ -75,6 +80,7 @@ let time = document.querySelector('#timeOutput')
 
 // save the markers as a global array
 let markersArray = []
+let searchRadius = .2;
 
 async function initMap() {
     // The location of G.A. Sydney
@@ -89,7 +95,7 @@ async function initMap() {
             
             
     map = new Map(document.getElementById("map"), {
-        zoom: 13,
+        zoom: 10,
         center: position,
         mapId: "SERVO APP",
         minZoom: 10,
@@ -133,7 +139,31 @@ async function initMap() {
         }
     }
 
+    function removeMarkers(centerObj) {
+        if (centerObj) {
+            const latNE =  northEast.lat()
+            const lngNE =  northEast.lng()
+            const latSW =  southWest.lat()
+            const lngSW =  southWest.lng()
+        } else {
+            const northEast = map.getBounds().getNorthEast()
+            const southWest = map.getBounds().getSouthWest()
+            const latNE =  northEast.lat()
+            const lngNE =  northEast.lng()
+            const latSW =  southWest.lat()
+            const lngSW =  southWest.lng()
+        }
+    
 
+        markersArray.forEach((mark) => {
+            let lat = mark.getPosition().lat()
+            let lng = mark.getPosition().lng()
+            if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
+                mark.setMap(null)
+            }
+        })
+        markersArray = []
+    }
     
     let centerLat = map.getCenter().lat()
     let centerLon = map.getCenter().lng()
@@ -156,23 +186,19 @@ async function initMap() {
     })
 
     map.addListener('bounds_changed', function() {
-        const northEast = map.getBounds().getNorthEast()
-        const southWest = map.getBounds().getSouthWest()
-        const latNE =  northEast.lat()
-        const lngNE =  northEast.lng()
-        const latSW =  southWest.lat()
-        const lngSW =  southWest.lng()
-        // console.log(`${latNE} ${lngNE} ${latSW} ${lngSW}`)
-        markersArray.forEach((mark) => {
-            let lat = mark.getPosition().lat()
-            let lng = mark.getPosition().lng()
-            if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
-                mark.setMap(null)
-            }
-        })
-        // console.log(markersArray.length)
-        markersArray = []
-        fetchServosWithin({ latNE, lngNE, latSW, lngSW })
+
+       
+
+        const coordObj = {
+            "center": {
+                "lat": map.getCenter().lat(),
+                "lng": map.getCenter().lng()
+            },
+            "radius": searchRadius
+        }
+
+        fetchServosWithinRadius(coordObj)
+        // fetchServosWithin({ latNE, lngNE, latSW, lngSW })
             // .then(res => console.log(res))
             .then(res => res.forEach((station) => {
                 
@@ -218,45 +244,15 @@ async function initMap() {
         // loop through all the markers, find their lat&lng, if outside bounds, turn the markers to null.
     })
 
+    // Radius slider DOM variables
+    const radiusSlider = document.querySelector("#radiusSlider")
+    radiusSlider.addEventListener("change", adjustSearchRadius)
 
-    
-    // map.addListener('center_changed', function() {
-    //     centerLat = map.getCenter().lat()
-    //     centerLon = map.getCenter().lng()
-    
-    //     // nearestList(centerLat, centerLon)
-
-    // })
+    function adjustSearchRadius(event) {
+        searchRadius = event.target.value * .1
+    }
 
 }
-
-
-// let centerLat = map.getCenter().lat()
-// let centerLon = map.getCenter().lng()
-
-
-
-    
-  
-    // Create the markers.
-    // tourStops.forEach((stop) => {
-    //   const marker = new google.maps.Marker({
-    //     position : stop.location,
-    //     map,
-    //     title: `${stop.name} is ${stop.distanceInKm}Km away` ,
-    //     label: `${stop.orderSeri}`,
-    //     optimized: false,
-    //   });
-  
-    //   // Add a click listener for each marker, and set up the info window.
-      
-    // });
-//   // The marker, positioned at Uluru
-//   const marker = new AdvancedMarkerView({
-//     map: map,
-//     position: position,
-//     title: "Uluru",
-//   });
 
 // fetch data from db and display in spotlight box
 const spotlightRefresh = document.getElementById("refresh-spot")
@@ -282,7 +278,3 @@ function refreshTime() {
 setInterval(refreshTime, 1000)
 
 initMap();
-
-
-
-

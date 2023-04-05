@@ -237,7 +237,7 @@ i {
 
 .team-blurb {
     font-size: .7rem;
-    width: 50%;
+    width: 55%;
     margin: 0;
 }
 
@@ -311,10 +311,16 @@ ul > li:hover {
 
 .spotlight-content {
     display: flex;
+    gap: 10px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.spotlight-info-wrapper {
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
-    margin: 5px 0;
+
 }
 
 #spotlight-info > p {

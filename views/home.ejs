@@ -61,6 +61,12 @@
     <main>
         <!--The div element for the map -->
         <div id="map"></div>
+
+        <div class="slidecontainer">
+            <label for="slider">search radius</label>
+            <input type="range" min="1" max="10" value="4" class="slider" id="radiusSlider" oninput="this.nextElementSibling.value = this.value + 'X'">
+            <output>4X</output>
+          </div>
     </main>
     <aside class="right">
         <div class="collapse-wrapper"><i id="rightCollapseBtn" class="fa-solid fa-circle-chevron-right"></i></div>

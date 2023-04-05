@@ -10,6 +10,8 @@ import { nearestList } from "./components/nearest_station.js";
 // import { renderServoList } from "./components/servo_list.js";
 // import { fetchServos } from "../servo_api"
 
+
+// Left aside DOM variables
 const leftAside = document.querySelector(".left")
 const leftAsideChildren = leftAside.querySelectorAll("section")
 const leftCollapseBtn = document.querySelector("#leftCollapseBtn")
@@ -35,6 +37,7 @@ function handleLeftCollapse(event) {
     
 }
 
+// Right aside DOM variables
 const rightAside = document.querySelector(".right")
 const rightAsideChildren = rightAside.querySelectorAll("section")
 const rightCollapseBtn = document.querySelector("#rightCollapseBtn")
@@ -65,6 +68,15 @@ function handleRightCollapse(event) {
         rightCollapseBtn.className = "fa-solid fa-circle-chevron-right"
     }
     
+}
+
+// Radius slider DOM variables
+const radiusSlider = document.querySelector("#radiusSlider")
+radiusSlider.addEventListener("change", adjustSearchRadius)
+
+function adjustSearchRadius(event) {
+    let radius = event.target.value
+    console.log(radius);
 }
 
 // Initialize and add the map

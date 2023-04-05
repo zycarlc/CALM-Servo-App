@@ -22,9 +22,12 @@ function renderServo (servo) {
 
     return `
         <div class="station-list">
-            <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}  ${servo[0]}m</a>
-            <p><img src="../icons/100pix/${servo[1]}.png">    ${servo[3]} </p>
-            <p> </p>
+            <div class="list-heading-wrapper">
+                <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}  </a>
+                <img src="../icons/100pix/${servo[1]}.png">
+            </div>
+            <p class="distance">${servo[0]}m</p>
+            <p class="address">${servo[3]}</p>
         </div>
     `
 }

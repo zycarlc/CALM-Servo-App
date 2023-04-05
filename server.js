@@ -31,8 +31,14 @@ app.get("/api/stats", (req, res) => {
 })
 
 app.post("/api/stations/bounds", (req, res) => {
-    // console.log(req.body)
-    Servo.findWithinBounds(req.body).then(stats => res.json(stats))
+    console.log(req.body);
+    Servo.findWithinBounds(req.body).then(servos => res.json(servos))
+})
+
+app.post("/api/stations/nearest", (req, res) => {
+    const { radius } = req.body
+    const { center } = req.body
+    Servo.findWithinRadius(center, radius).then(servos => res.json(servos))
 })
 
 app.listen(config.port, () => {

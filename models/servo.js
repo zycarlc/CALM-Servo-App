@@ -67,6 +67,19 @@ class Servo {
         const sql = `SELECT * FROM stations where latitude > ${coords.latSW} AND latitude < ${coords.latNE} AND longitude > ${coords.lngSW} AND longitude < ${coords.lngNE}`
         return db.query(sql).then(res => res.rows)
     }
+
+    static findWithinRadius(center, radius) {
+
+        let newCoords = {
+                latNE: center.lat + radius,
+                lngNE: center.lng + radius,
+                latSW: center.lat - radius,
+                lngSW: center.lng - radius
+        }
+
+        const sql = `SELECT * FROM stations where latitude > ${newCoords.latSW} AND latitude < ${newCoords.latNE} AND longitude > ${newCoords.lngSW} AND longitude < ${newCoords.lngNE} LIMIT 700`
+        return db.query(sql).then(res => res.rows)
+    }
     
 }
 

@@ -4,6 +4,12 @@ import { mapCenterInfo } from "./components/map_center.js" ;
 import { getOilPrice } from "./components/Oil_price.js";
 import { getUserLocation } from "./components/get_user_location.js"
 import { spotlight } from "./components/spotlight_init.js";
+import { nearestList } from "./components/nearest_station.js";
+
+// import { getDistanceFromLatLon } from "./components/distance_to_map_center.js";
+// import { renderServoList } from "./components/servo_list.js";
+// import { fetchServos } from "../servo_api"
+
 
 
 const leftAside = document.querySelector(".left")
@@ -57,11 +63,16 @@ function handleRightCollapse(event) {
 }
 
 
+
+
+
 // Initialize and add the map
 let map;
 
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('#timeOutput')
+
+
 
 
 
@@ -99,6 +110,7 @@ async function initMap() {
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
     getOilPrice()
     spotlight()
+  
     
 
     const icons = {
@@ -107,69 +119,33 @@ async function initMap() {
         },
         "Caltex": {
             icon: "/icons/caltex.png"
-        },
+          },
         "7-Eleven Pty Ltd": {
             icon: "/icons/seven11.png"
-        },
+          },
         "Shell": {
             icon: "/icons/shell.png"
-        },
+          },
         "United": {
             icon: "/icons/united.png"
-        },
+          },
         "Default": {
             icon: "/icons/default.png"
         }
     }
 
 
-    // fetchServos()
-    //     .then(res => res.forEach((station) => {
-
-            
-    //         if(!icons[station.station_owner]){
-    //             station.station_owner = "Default"
-    //         }
-
-    //         const marker = new google.maps.Marker({
-    //             position : { lat:Number(station.latitude), lng:Number(station.longitude) },
-    //             map,
-    //             icon: icons[station.station_owner].icon,
-    //             label: "",
-    //             title: `${station.station_address}` 
-    //         })
-            
-    //         const infoWindow = new google.maps.InfoWindow();
-    //         const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
-
-    //         marker.addListener("click", () => {
-    //             infoWindow.close();
-    //             infoWindow.setContent(contentString);
-    //             infoWindow.open(marker.getMap(), marker);
-    //         });
-
-    //         //   const infoWindow1 = new google.maps.InfoWindow();
-    //         marker.addListener('mouseover', function() {
-    //             // infoWindow1.setContent(`<p>${station.station_name}</p>`);
-    //             // infoWindow1.open(marker.getMap(), marker);
-    //             marker.set("label", {
-    //                 text: `${station.station_name}`,
-    //                 color: '#00008B',
-    //                 fontSize:'20px',
-    //                 fontWeight:'bold',
-    //             })           
-    //         });
-
-    //         marker.addListener('mouseout', function() {
-    //             marker.set("label", "")
-    //         });
-
-    //     }))
-
-    map.addListener("center_changed", () => {
+    
     let centerLat = map.getCenter().lat()
     let centerLon = map.getCenter().lng()
+
+    nearestList(centerLat, centerLon)
+    
+    map.addListener("center_changed", () => {
+    centerLat = map.getCenter().lat()
+    centerLon = map.getCenter().lng()
     mapCenterInfo(centerLat, centerLon)
+    nearestList(centerLat, centerLon)
     });
 
     map.addListener("mouseup", () => {
@@ -190,15 +166,17 @@ async function initMap() {
         fetchServosWithin({ latNE, lngNE, latSW, lngSW })
             // .then(res => console.log(res))
             .then(res => res.forEach((station) => {
-                // if the owner is not a big one
+
+                // /renderServoList (servos)
+            
                 if(!icons[station.station_owner]){
                     station.station_owner = "Default"
                 }
-                
+    
                 const marker = new google.maps.Marker({
                     position : { lat:Number(station.latitude), lng:Number(station.longitude) },
                     map,
-                    icon: icons[station.station_owner].icon,
+                    icon: icons[station.station_owner].icon,    
                     label: "",
                     title: `${station.station_address}` 
                 })
@@ -212,10 +190,8 @@ async function initMap() {
                     infoWindow.open(marker.getMap(), marker);
                 });
     
-                //   const infoWindow1 = new google.maps.InfoWindow();
                 marker.addListener('mouseover', function() {
-                    // infoWindow1.setContent(`<p>${station.station_name}</p>`);
-                    // infoWindow1.open(marker.getMap(), marker);
+
                     marker.set("label", {
                         text: `${station.station_name}`,
                         color: '#00008B',
@@ -230,7 +206,25 @@ async function initMap() {
     
             }))
     })
+
+
+    
+    // map.addListener('center_changed', function() {
+    //     centerLat = map.getCenter().lat()
+    //     centerLon = map.getCenter().lng()
+    
+    //     // nearestList(centerLat, centerLon)
+
+    // })
+
 }
+
+
+// let centerLat = map.getCenter().lat()
+// let centerLon = map.getCenter().lng()
+
+
+
     
   
     // Create the markers.
@@ -269,3 +263,7 @@ function refreshTime() {
 setInterval(refreshTime, 1000)
 
 initMap();
+
+
+
+

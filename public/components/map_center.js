@@ -12,8 +12,8 @@ export function mapCenterInfo (centerLat, centerLng) {
       .then(res => res.data.results[0].formatted_address)
       .then(address => mapCenterAddress.innerHTML = address)
       .then(mapCenterInfo.innerHTML = `
-          <p>lat: ${centerLat} </p>
-          <p>lon: ${centerLng} </p>
+          <p><span class="bold">lat:</span> ${centerLat} </p>
+          <p><span class="bold">long:</span> ${centerLng} </p>
         `)
 }
 

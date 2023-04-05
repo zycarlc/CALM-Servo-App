@@ -167,14 +167,22 @@ async function initMap() {
 
         stationsArray.forEach((station) => {   
             //if the station brand is not one of the biggest one. then set to default logo
+            let [ width, height ] = [ 25, 25 ]
             if(!icons[station.station_owner]){
                 station.station_owner = "Default"
+                width = 19
+                height = 27
             }
-
+            const icon = {
+                url: icons[station.station_owner].icon,
+                scaledSize: new google.maps.Size(width, height),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0, 0)
+            }
             const marker = new google.maps.Marker({
                 position : { lat:Number(station.latitude), lng:Number(station.longitude) },
                 map,
-                icon: icons[station.station_owner].icon,    
+                icon: icon,    
                 label: "",
                 title: `${station.station_address}` 
             })

@@ -66,8 +66,8 @@ aside {
     flex: .15;
     overflow: hidden;
     transition: .5s;
-    background: rgb(236, 236, 236);
-    border-right: rgba(128, 128, 128, 0.458) 2px solid;
+    background-color: lightgray;
+    border-left: rgba(236, 236, 236, 0.575) 2px solid;
 }
 
 section {
@@ -130,7 +130,29 @@ section {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding-top: 10px;
+    height: 2rem;
+    margin-top: 25px;
+}
+
+#timeOutput {
+    font-weight: 600;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.map-center-info {
+    margin-top: 10px;
+}
+
+.map-center-info > p {
+    margin: 0;
+}
+
+.map-center-address {
+    margin-top: 10px;
+    font-weight: 600;
 }
 
 #map {
@@ -148,6 +170,29 @@ footer {
     background: #ddddfe;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.station-list > p {
+    margin: 0;
+}
+
+.list-heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-heading-wrapper > img {
+    height: 2rem;
+}
+
+.list-heading-wrapper > a {
+    font-weight: 600;
+}
+
+.distance {
+    font-weight: 300;
+    padding-bottom: 5px;
 }
 
 .station-list:nth-child(2n+1) {
@@ -258,4 +303,24 @@ ul > li:hover {
   
 .slider:hover {
     opacity: 1; 
+}
+
+.fa-arrows-rotate {
+    font-size: .7em;
+}
+
+.spotlight-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 5px 0;
+}
+
+#spotlight-info > p {
+    margin: 0 ;
+}
+
+.spotlight-station-name {
+    font-weight: 600;
 }

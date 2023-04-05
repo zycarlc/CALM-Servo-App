@@ -270,9 +270,12 @@ spotlightDirect.addEventListener("click", (event) => {
 
 // Setting a time that refreshes the time
 function refreshTime() {
-    const dateString = new Date().toLocaleString();
-    const formattedString = dateString.replace(", ", " - ");
-    time.innerText = formattedString
+    const currentTime = new Date().toLocaleString()
+    const dateString = new Date()
+    const formattedDay = dateString.toLocaleDateString("en-AU", { weekday: "long" })
+    const formattedTime = currentTime.replace(" , ", " - ")
+    time.innerText = formattedDay + " " + formattedTime
+
 }
 
 // refreshes the time every second

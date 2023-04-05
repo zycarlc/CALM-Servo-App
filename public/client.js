@@ -139,32 +139,66 @@ async function initMap() {
         }
     }
 
-    function removeMarkers(centerObj) {
-        if (centerObj) {
-            const latNE =  northEast.lat()
-            const lngNE =  northEast.lng()
-            const latSW =  southWest.lat()
-            const lngSW =  southWest.lng()
-        } else {
-            const northEast = map.getBounds().getNorthEast()
-            const southWest = map.getBounds().getSouthWest()
-            const latNE =  northEast.lat()
-            const lngNE =  northEast.lng()
-            const latSW =  southWest.lat()
-            const lngSW =  southWest.lng()
-        }
-    
+    function removeMarkers (centerObj) {
+
+        let latNE = centerObj.center.lat + centerObj.radius
+        let lngNE = centerObj.center.lng + centerObj.radius
+        let latSW = centerObj.center.lat - centerObj.radius
+        let lngSW = centerObj.center.lng - centerObj.radius
+
 
         markersArray.forEach((mark) => {
             let lat = mark.getPosition().lat()
             let lng = mark.getPosition().lng()
-            if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
+            // if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
                 mark.setMap(null)
-            }
+            // }
         })
         markersArray = []
     }
-    
+
+    function addMarkers (stationsArray) {
+        stationsArray.forEach((station) => {   
+            //if the station brand is not one of the biggest one. then set to default logo
+            if(!icons[station.station_owner]){
+                station.station_owner = "Default"
+            }
+
+            const marker = new google.maps.Marker({
+                position : { lat:Number(station.latitude), lng:Number(station.longitude) },
+                map,
+                icon: icons[station.station_owner].icon,    
+                label: "",
+                title: `${station.station_address}` 
+            })
+
+            const infoWindow = new google.maps.InfoWindow();
+            const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
+            
+            marker.addListener("click", () => {
+                infoWindow.close();
+                infoWindow.setContent(contentString);
+                infoWindow.open(marker.getMap(), marker);
+            });
+            
+            marker.addListener('mouseover', function() {
+                
+                marker.set("label", {
+                    text: `${station.station_name}`,
+                    color: '#00008B',
+                    fontSize:'20px',
+                    fontWeight:'bold',
+                })           
+            });
+            
+            marker.addListener('mouseout', function() {
+                marker.set("label", "")
+            });
+
+            markersArray.push(marker)
+        })
+    }
+
     let centerLat = map.getCenter().lat()
     let centerLon = map.getCenter().lng()
 
@@ -177,17 +211,15 @@ async function initMap() {
         nearestList(centerLat, centerLon)
     });
 
-    map.addListener("mouseup", () => {
-        fetchServos()
-    })
+    // map.addListener("mouseup", () => {
+    //     fetchServos()
+    // })
 
-    map.addListener("zoom_changed", () => {
-        fetchServos()
-    })
+    // map.addListener("zoom_changed", () => {
+    //     fetchServos()
+    // })
 
     map.addListener('bounds_changed', function() {
-
-       
 
         const coordObj = {
             "center": {
@@ -196,51 +228,11 @@ async function initMap() {
             },
             "radius": searchRadius
         }
-
+        removeMarkers(coordObj);
         fetchServosWithinRadius(coordObj)
+            .then(stationsArray => addMarkers(stationsArray))
         // fetchServosWithin({ latNE, lngNE, latSW, lngSW })
             // .then(res => console.log(res))
-            .then(res => res.forEach((station) => {
-                
-                //if the station brand is not one of the biggest one. then set to default logo
-                if(!icons[station.station_owner]){
-                    station.station_owner = "Default"
-                }
-    
-                const marker = new google.maps.Marker({
-                    position : { lat:Number(station.latitude), lng:Number(station.longitude) },
-                    map,
-                    icon: icons[station.station_owner].icon,    
-                    label: "",
-                    title: `${station.station_address}` 
-                })
-
-                markersArray.push(marker)
-
-                const infoWindow = new google.maps.InfoWindow();
-                const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
-    
-                marker.addListener("click", () => {
-                    infoWindow.close();
-                    infoWindow.setContent(contentString);
-                    infoWindow.open(marker.getMap(), marker);
-                });
-    
-                marker.addListener('mouseover', function() {
-
-                    marker.set("label", {
-                        text: `${station.station_name}`,
-                        color: '#00008B',
-                        fontSize:'20px',
-                        fontWeight:'bold',
-                    })           
-                });
-    
-                marker.addListener('mouseout', function() {
-                    marker.set("label", "")
-                });
-    
-            }))
         // loop through all the markers, find their lat&lng, if outside bounds, turn the markers to null.
     })
 
@@ -249,9 +241,18 @@ async function initMap() {
     radiusSlider.addEventListener("change", adjustSearchRadius)
 
     function adjustSearchRadius(event) {
-        searchRadius = event.target.value * .1
-    }
+        const coordObj = {
+            "center": {
+                "lat": map.getCenter().lat(),
+                "lng": map.getCenter().lng()
+            },
+            "radius": event.target.value * .1
+        }
+        removeMarkers(coordObj)
 
+        fetchServosWithinRadius(coordObj)
+            .then(stationsArray => addMarkers(stationsArray))
+    }
 }
 
 // fetch data from db and display in spotlight box

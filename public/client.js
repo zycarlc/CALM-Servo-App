@@ -41,6 +41,13 @@ const rightCollapseBtn = document.querySelector("#rightCollapseBtn")
 rightCollapseBtn.addEventListener("click", handleRightCollapse)
 let rightIsCollapsed = false;
 
+document.addEventListener("keydown", e =>{
+    if (e.key.toLowerCase() === "b" && e.ctrlKey){
+        handleLeftCollapse(e)
+        handleRightCollapse(e)
+    }
+})
+
 function handleRightCollapse(event) {
     if (!rightIsCollapsed) {
         rightAsideChildren.forEach(child => {

@@ -53,8 +53,13 @@ aside {
 }
 
 .right > .collapse-wrapper {
-    left: 7px;
-
+    left: -7px;
+    top: 10px;
+    width: 1rem;
+    padding: .25rem;
+    border-radius: 10px;
+    background-color: lightgray;
+    z-index: 1;
 }
 
 .right {
@@ -68,6 +73,16 @@ aside {
     transition: .5s;
     background-color: lightgray;
     border-left: rgba(236, 236, 236, 0.575) 2px solid;
+}
+
+.right-collapsed > .collapse-wrapper {
+    left: 0;
+    top: 10px;
+    width: 1rem;
+    padding: .25rem;
+    border-radius: 10px;
+    background-color: lightgray;
+    z-index: 1;
 }
 
 section {
@@ -131,7 +146,8 @@ section {
     align-items: center;
     gap: 10px;
     height: 2rem;
-    margin-top: 25px;
+    width: 88%;
+    align-self: flex-end;
 }
 
 #timeOutput {

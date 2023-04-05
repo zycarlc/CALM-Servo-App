@@ -253,6 +253,8 @@ async function initMap() {
         fetchServosWithinRadius(coordObj)
             .then(stationsArray => addMarkers(stationsArray))
     }
+
+
 }
 
 // fetch data from db and display in spotlight box
@@ -268,6 +270,13 @@ spotlightDirect.addEventListener("click", (event) => {
     map.setCenter({lat: Number(coordinate.lat), lng: Number(coordinate.lng)})
 })
 
+// exporting this function so I'm able to pull the setCenter function
+export function setCenterExport(dataset) {
+    let coordinate = dataset
+    map.setCenter({lat: Number(coordinate.lat), lng: Number(coordinate.lng)})
+}
+
+
 // Setting a time that refreshes the time
 function refreshTime() {
     const dateString = new Date().toLocaleString();
@@ -277,5 +286,7 @@ function refreshTime() {
 
 // refreshes the time every second
 setInterval(refreshTime, 1000)
+
+// module.exports = setCenter
 
 initMap();

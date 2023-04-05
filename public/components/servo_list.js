@@ -15,9 +15,14 @@ function renderServo (servo) {
     }else if (servo[1] === "7-Eleven Pty Ltd"){
         servo[1] = "seven11"
     }
+
+    // let nearStation = document.createElement("a")
+    // nearStation.textContent = `${servos[3]}`
+    // nearestStations.appendChild
+
     return `
         <div class="station-list">
-            <p>${servo[2]}  ${servo[0]}m</p>
+            <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}  ${servo[0]}m</a>
             <p><img src="../icons/100pix/${servo[1]}.png">    ${servo[3]} </p>
             <p> </p>
         </div>

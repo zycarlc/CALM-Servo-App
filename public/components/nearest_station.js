@@ -16,7 +16,7 @@ let totalStationArr = []
         stations.forEach(station => {
 
             let distanceToCenter = Math.floor(getDistanceFromLatLon(centerLat, centerLon, Number(station.latitude), Number(station.longitude)))
-            console.log(distanceToCenter)
+            // console.log(distanceToCenter)
 
             let pairArr = []
             

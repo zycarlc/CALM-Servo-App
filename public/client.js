@@ -10,8 +10,6 @@ import { nearestList } from "./components/nearest_station.js";
 // import { renderServoList } from "./components/servo_list.js";
 // import { fetchServos } from "../servo_api"
 
-
-
 const leftAside = document.querySelector(".left")
 const leftAsideChildren = leftAside.querySelectorAll("section")
 const leftCollapseBtn = document.querySelector("#leftCollapseBtn")
@@ -62,20 +60,11 @@ function handleRightCollapse(event) {
     
 }
 
-
-
-
-
 // Initialize and add the map
 let map;
 
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('#timeOutput')
-
-
-
-
-
 
 async function initMap() {
     // The location of G.A. Sydney
@@ -115,20 +104,20 @@ async function initMap() {
 
     const icons = {
         "BP": {
-          icon: "/icons/BP.png"
+          icon: "/icons/100pix/BP.png"
         },
         "Caltex": {
             icon: "/icons/caltex.png"
-          },
+        },
         "7-Eleven Pty Ltd": {
             icon: "/icons/seven11.png"
-          },
+        },
         "Shell": {
             icon: "/icons/shell.png"
-          },
+        },
         "United": {
             icon: "/icons/united.png"
-          },
+        },
         "Default": {
             icon: "/icons/default.png"
         }
@@ -142,10 +131,10 @@ async function initMap() {
     nearestList(centerLat, centerLon)
     
     map.addListener("center_changed", () => {
-    centerLat = map.getCenter().lat()
-    centerLon = map.getCenter().lng()
-    mapCenterInfo(centerLat, centerLon)
-    nearestList(centerLat, centerLon)
+        centerLat = map.getCenter().lat()
+        centerLon = map.getCenter().lng()
+        mapCenterInfo(centerLat, centerLon)
+        nearestList(centerLat, centerLon)
     });
 
     map.addListener("mouseup", () => {
@@ -166,9 +155,7 @@ async function initMap() {
         fetchServosWithin({ latNE, lngNE, latSW, lngSW })
             // .then(res => console.log(res))
             .then(res => res.forEach((station) => {
-
-                // /renderServoList (servos)
-            
+                //if the station brand is not one of the biggest one. then set to default logo
                 if(!icons[station.station_owner]){
                     station.station_owner = "Default"
                 }
@@ -249,8 +236,16 @@ async function initMap() {
 
 // fetch data from db and display in spotlight box
 const spotlightRefresh = document.getElementById("refresh-spot")
-
 spotlightRefresh.addEventListener("click",spotlight)
+
+const spotlightDirect = document.querySelector(".spotlight-station-name")
+spotlightDirect.addEventListener("click", (event) => {
+    if (event) {
+        event.preventDefault()
+    }
+    let coordinate = event.target.dataset
+    map.setCenter({lat: Number(coordinate.lat), lng: Number(coordinate.lng)})
+})
 
 // Setting a time that refreshes the time
 function refreshTime() {

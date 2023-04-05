@@ -80,7 +80,8 @@ let time = document.querySelector('#timeOutput')
 
 // save the markers as a global array
 let markersArray = []
-let searchRadius = .2;
+let searchRadius = 0.1;
+// let centerMarker = new google.maps.Marker({})
 
 async function initMap() {
     // The location of G.A. Sydney
@@ -95,11 +96,13 @@ async function initMap() {
             
             
     map = new Map(document.getElementById("map"), {
-        zoom: 10,
+        zoom: 12,
         center: position,
         mapId: "SERVO APP",
         minZoom: 10,
     })
+
+    
 
     getUserLocation()
     .then(res => {
@@ -136,28 +139,32 @@ async function initMap() {
         },
         "Default": {
             icon: "/icons/default.png"
+        },
+        "CenterMarker": {
+            icon: "/icons/100pix/Movingcreditcard.gif"
         }
     }
 
-    function removeMarkers (centerObj) {
+    let centerLat = map.getCenter().lat()
+    let centerLon = map.getCenter().lng()
 
-        let latNE = centerObj.center.lat + centerObj.radius
-        let lngNE = centerObj.center.lng + centerObj.radius
-        let latSW = centerObj.center.lat - centerObj.radius
-        let lngSW = centerObj.center.lng - centerObj.radius
-
-
-        markersArray.forEach((mark) => {
-            let lat = mark.getPosition().lat()
-            let lng = mark.getPosition().lng()
-            // if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
-                mark.setMap(null)
-            // }
-        })
-        markersArray = []
-    }
+    
 
     function addMarkers (stationsArray) {
+
+        centerLat = map.getCenter().lat()
+        centerLon = map.getCenter().lng()
+        const centerMarker = new google.maps.Marker({
+            position: { lat: centerLat, lng: centerLon },
+            map,
+            icon: icons["CenterMarker"].icon, 
+            title: ""   
+            
+        })
+
+        markersArray.push(centerMarker)
+        
+
         stationsArray.forEach((station) => {   
             //if the station brand is not one of the biggest one. then set to default logo
             let [ width, height ] = [ 25, 25 ]
@@ -207,8 +214,27 @@ async function initMap() {
         })
     }
 
-    let centerLat = map.getCenter().lat()
-    let centerLon = map.getCenter().lng()
+
+    function removeMarkers (centerObj) {
+
+        let latNE = centerObj.center.lat + centerObj.radius
+        let lngNE = centerObj.center.lng + centerObj.radius
+        let latSW = centerObj.center.lat - centerObj.radius
+        let lngSW = centerObj.center.lng - centerObj.radius
+
+        // centerMarker.setMap(null)
+
+        markersArray.forEach((mark) => {
+            let lat = mark.getPosition().lat()
+            let lng = mark.getPosition().lng()
+            // if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
+                mark.setMap(null)
+            // }
+        })
+        markersArray = []
+    }
+
+
 
     nearestList(centerLat, centerLon)
     
@@ -249,12 +275,15 @@ async function initMap() {
     radiusSlider.addEventListener("change", adjustSearchRadius)
 
     function adjustSearchRadius(event) {
+
+        searchRadius = event.target.value * 0.045
+
         const coordObj = {
             "center": {
                 "lat": map.getCenter().lat(),
                 "lng": map.getCenter().lng()
             },
-            "radius": event.target.value * .1
+            "radius": event.target.value * 0.045
         }
         removeMarkers(coordObj)
 

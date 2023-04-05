@@ -21,6 +21,7 @@ function renderServo (servo) {
     // nearestStations.appendChild
 
     return `
+
         <div class="station-list">
             <div class="list-heading-wrapper">
                 <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}  </a>
@@ -29,5 +30,6 @@ function renderServo (servo) {
             <p class="distance">${servo[0]}m</p>
             <p class="address">${servo[3]}</p>
         </div>
+
     `
 }

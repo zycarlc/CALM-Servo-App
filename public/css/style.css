@@ -259,7 +259,3 @@ ul > li:hover {
 .slider:hover {
     opacity: 1; 
 }
-
-#inline {
-    display: inline;
-}

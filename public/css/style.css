@@ -148,10 +148,13 @@ section {
     height: 2rem;
     width: 88%;
     align-self: flex-end;
+    border-radius: 10px 0 0 10px;
+    background-color: lightgray;
 }
 
 #timeOutput {
-    font-weight: 600;
+    font-weight: 300;
+    color: #2c2c8c;
 }
 
 .bold {

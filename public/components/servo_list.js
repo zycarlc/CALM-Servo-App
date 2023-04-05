@@ -24,7 +24,7 @@ function renderServo (servo) {
         <div class="station-list">
             <div class="list-heading-wrapper">
                 <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}  </a>
-                <img src="../icons/100pix/${servo[1]}.png">
+                <img style="width:auto;height:30px;" src="../icons/100pix/${servo[1]}.png">
             </div>
             <p class="distance">${servo[0]}m</p>
             <p class="address">${servo[3]}</p>

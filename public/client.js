@@ -73,6 +73,9 @@ let map;
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('#timeOutput')
 
+// save the markers as a global array
+let markersArray = []
+
 async function initMap() {
     // The location of G.A. Sydney
     const position = { lat: -36.358334, lng: 146.312500 };
@@ -159,9 +162,20 @@ async function initMap() {
         const lngNE =  northEast.lng()
         const latSW =  southWest.lat()
         const lngSW =  southWest.lng()
+        // console.log(`${latNE} ${lngNE} ${latSW} ${lngSW}`)
+        markersArray.forEach((mark) => {
+            let lat = mark.getPosition().lat()
+            let lng = mark.getPosition().lng()
+            if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
+                mark.setMap(null)
+            }
+        })
+        // console.log(markersArray.length)
+        markersArray = []
         fetchServosWithin({ latNE, lngNE, latSW, lngSW })
             // .then(res => console.log(res))
             .then(res => res.forEach((station) => {
+                
                 //if the station brand is not one of the biggest one. then set to default logo
                 if(!icons[station.station_owner]){
                     station.station_owner = "Default"
@@ -174,7 +188,9 @@ async function initMap() {
                     label: "",
                     title: `${station.station_address}` 
                 })
-                
+
+                markersArray.push(marker)
+
                 const infoWindow = new google.maps.InfoWindow();
                 const contentString = `<h3>${station.station_name}</h1>` +`<p>${station.station_address}</p>`
     
@@ -199,6 +215,7 @@ async function initMap() {
                 });
     
             }))
+        // loop through all the markers, find their lat&lng, if outside bounds, turn the markers to null.
     })
 
 

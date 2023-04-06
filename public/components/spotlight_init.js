@@ -1,7 +1,3 @@
-// const { default: axios } = require("axios");
-
-
-
 export function spotlight(event){
     let icons = {
         BP: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/BP_kcqdy7.png",

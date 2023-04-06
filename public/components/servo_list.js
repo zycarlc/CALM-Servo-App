@@ -1,5 +1,3 @@
-// import { fetchFuelPrice } from "../servo_api.js"
-
 const nearestStations = document.querySelector('.nearest-results')
 
 export function renderServoList (servos) {
@@ -21,10 +19,6 @@ function renderServo (servo) {
     }else if (servo[1] === "7-Eleven Pty Ltd"){
         servo[1] = "seven11"
     }
-
-    // let nearStation = document.createElement("a")
-    // nearStation.textContent = `${servos[3]}`
-    // nearestStations.appendChild
 
     return `
     <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">

@@ -24,7 +24,7 @@ export function spotlight(event){
 
             spotlightServoName.setAttribute("data-lat", res.data.latitude);
             spotlightServoName.setAttribute("data-lng", res.data.longitude);
-            spotlightLogo.setAttribute("src", `../icons/100pix/${spotlightOwner}.png`)
+            spotlightLogo.setAttribute("src", `/icons/100pix/${spotlightOwner}.png`)
             spotlightLogo.setAttribute("style", `width:${width}px;height:${height}px;`)
             spotlightServoName.textContent = res.data.station_name
             spotlightInfo.innerHTML = `

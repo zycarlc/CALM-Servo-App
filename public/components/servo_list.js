@@ -31,7 +31,7 @@ function renderServo (servo) {
                     <p class="distance" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[0]}m</p>
                     <p class="address" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[3]}</p>
                 </div>
-                <img style="width:auto;height:30px;" src="../icons/100pix/${servo[1]}.png" data-lat="${servo[4]}" data-lng="${servo[5]}">
+                <img style="width:auto;height:30px;" src="/icons/100pix/${servo[1]}.png" data-lat="${servo[4]}" data-lng="${servo[5]}">
             </div>
         </div>
     </a>

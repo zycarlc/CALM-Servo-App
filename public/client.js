@@ -73,7 +73,7 @@ function handleRightCollapse(event) {
 
 
 // Initialize and add the map
-let map;
+let map, infoWindow;
 
 // Hooking onto the Date class within home.ejs
 let time = document.querySelector('#timeOutput')
@@ -85,7 +85,10 @@ let searchRadius = 0.1;
 
 async function initMap() {
     // The location of G.A. Sydney
-    const position = { lat: -36.358334, lng: 146.312500 };
+    const gaPosition = { lat: -36.358334, lng: 146.312500 };
+    // User location
+    const userPosition = {}
+
     // const position = {};
  
     // Request needed libraries.
@@ -97,7 +100,7 @@ async function initMap() {
             
     map = new Map(document.getElementById("map"), {
         zoom: 12,
-        center: position,
+        center: gaPosition,
         mapId: "SERVO APP",
         minZoom: 10,
     })
@@ -107,13 +110,46 @@ async function initMap() {
     getUserLocation()
     .then(res => {
         if (res.error) {
-            return position
+            return gaPosition
         }
-        position.lat = Number(res.lat)
-        position.lng = Number(res.lng)
-        return {lat: res.lat, lng: res.lng}
+        userPosition.lat = Number(res.lat)
+        userPosition.lng = Number(res.lng)
+        return userPosition
     })
-    .then(res => map.setCenter(res))
+    .then(userPosition => {
+        map.setCenter(userPosition)
+        setUserLocationMaker(userPosition)
+    })
+
+
+    function setUserLocationMaker (userPosition) {
+        infoWindow = new google.maps.InfoWindow();
+    
+        const locationButton = document.createElement("button");
+      
+        locationButton.textContent = "Pan to Current Location";
+        locationButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+        locationButton.addEventListener("click", () => {
+            infoWindow.setPosition(userPosition);
+            infoWindow.setContent("Location found.");
+            infoWindow.open(userPosition);
+            map.setCenter(userPosition);
+        })
+        const userLocationIcon = {
+            url: "/icons/Maps-Center-Direction.512.png",
+            scaledSize: new google.maps.Size(30, 30),
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0, 0)
+        }
+        const userLocationMarker = new google.maps.Marker({
+            position : userPosition,
+            map,
+            icon: userLocationIcon,    
+            label: "",
+            title: "current location" 
+        })
+    }
 
     mapCenterInfo(map.getCenter().lat(), map.getCenter().lng())
     getOilPrice()

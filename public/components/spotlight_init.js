@@ -3,6 +3,14 @@
 
 
 export function spotlight(event){
+    let icons = {
+        BP: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/BP_kcqdy7.png",
+        Caltex: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/caltex_hjng3g.png",
+        seven11: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754278/seven11_k3dqag.png",
+        Shell: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/shell_bva7s1.png",
+        United: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754278/united_zadmjo.png",
+        default: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/default_bcwlof.png"
+    }
     if(event){
         event.preventDefault()
     }
@@ -24,7 +32,7 @@ export function spotlight(event){
 
             spotlightServoName.setAttribute("data-lat", res.data.latitude);
             spotlightServoName.setAttribute("data-lng", res.data.longitude);
-            spotlightLogo.setAttribute("src", `/icons/100pix/${spotlightOwner}.png`)
+            spotlightLogo.setAttribute("src", icons[spotlightOwner])
             spotlightLogo.setAttribute("style", `width:${width}px;height:${height}px;`)
             spotlightServoName.textContent = res.data.station_name
             spotlightInfo.innerHTML = `

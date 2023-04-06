@@ -46,10 +46,24 @@ aside {
     border-right: rgba(128, 128, 128, 0.458) 2px solid;
 }
 
+.left-collapsed > .collapse-wrapper {
+    left: 0;
+    top: 10px;
+    width: 1rem;
+    padding: .25rem;
+    border-radius: 10px;
+    background-color: lightgray;
+    z-index: 1;
+}
+
 .collapse-wrapper {
     position: absolute;
-    right: 7px;
+    right: -7px;
+    top: 10px;
     z-index: 1;
+    background-color: rgb(236, 236, 236);
+    padding: .25rem;
+    border-radius: 10px;
 }
 
 .right > .collapse-wrapper {

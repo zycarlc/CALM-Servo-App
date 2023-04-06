@@ -6,9 +6,8 @@ export function getOilPrice(){
     const naturlGas = document.getElementById("naturl-gas")
 
     axios
-        .get("https://commodities-api.com/api/latest?access_key=g60u39m6lv1039x94j7eyez54j250o4tt7dy91jlm1iwl6xeukvqzwwgih9s")
+        .get("https://commodities-api.com/api/latest?access_key=4pjvc703gof82qsf1tl62te0kwzc4v93gnjmmo8brvuiba80x86wi0qsbtb3")
         .then(res => {
-            console.log(res.data)
             oilPriceDate.innerHTML = res.data.data.date
             wtiOil.innerHTML = `WTI Oil ${Math.floor(1/res.data.data.rates.WTIOIL * 100) / 100} USD per barrel`
             brentOil.innerHTML = `Brent Oil ${Math.floor(1/res.data.data.rates.BRENTOIL * 100) / 100} USD per barrel`

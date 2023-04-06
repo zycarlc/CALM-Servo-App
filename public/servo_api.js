@@ -22,3 +22,7 @@ export function fetchServosWithinRadius (coordObj) {
     return axios.post("/api/stations/nearest", coordObj)
         .then(res => res.data)
 }
+
+export function fetchFuelPrice() {
+    return (Math.random() * (2 - 1.5) + 1.5).toFixed(2)
+}

@@ -160,7 +160,6 @@ section {
     width: 88%;
     align-self: flex-end;
     border-radius: 10px 0 0 10px;
-    background-color: lightgray;
 }
 
 #timeOutput {
@@ -485,15 +484,17 @@ ul > li:hover {
     width: 2.8em;
   }
 
-  #locationBtn {
+#locationBtn {
     padding: .5rem;
     border-radius: 20px;
-    border: #50508e solid 2px;
+    border: #50508e81 solid 2px;
     margin-bottom: 3px;
-  }
+    border-width: 1px;
+}
 
 #locationBtn:hover {
     background-color: white;
     cursor: pointer;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    border-color: rgba(223,225,229,0);
 }
-

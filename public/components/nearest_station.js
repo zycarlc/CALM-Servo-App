@@ -1,6 +1,6 @@
 import { getDistanceFromLatLon } from "./distance_to_map_center.js";
 import { renderServoList } from "./servo_list.js";
-import { fetchServos } from "../servo_api.js"
+import { fetchServos, fetchFuelPrice } from "../servo_api.js"
 import { setCenterExport } from "../client.js"
 
 
@@ -23,8 +23,10 @@ export function nearestList(centerLat, centerLon){
             // console.log(distanceToCenter)
 
             let pairArr = []
+
+            let currentPrice = fetchFuelPrice()
             
-            pairArr.push(distanceToCenter, station.station_owner, station.station_name, station.station_address, station.latitude, station.longitude)
+            pairArr.push(distanceToCenter, station.station_owner, station.station_name, station.station_address, station.latitude, station.longitude, currentPrice)
 
             distanceArr.push(distanceToCenter)
 

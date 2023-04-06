@@ -7,7 +7,14 @@ export function renderServoList (servos) {
 }
 
 function renderServo (servo) {
-    
+    let icons = {
+        BP: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/BP_kcqdy7.png",
+        Caltex: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/caltex_hjng3g.png",
+        seven11: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754278/seven11_k3dqag.png",
+        Shell: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/shell_bva7s1.png",
+        United: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754278/united_zadmjo.png",
+        default: "https://res.cloudinary.com/dmla1ujpx/image/upload/v1680754277/default_bcwlof.png"
+    }
     let iconArr =["BP", "Caltex", "7-Eleven Pty Ltd", "Shell", "United"]
     if(!iconArr.includes(servo[1])){
         servo[1] = "default"
@@ -31,7 +38,7 @@ function renderServo (servo) {
                     <p class="distance" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[0]}m</p>
                     <p class="address" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[3]}</p>
                 </div>
-                <img style="width:auto;height:30px;" src="/icons/100pix/${servo[1]}.png" data-lat="${servo[4]}" data-lng="${servo[5]}">
+                <img style="width:auto;height:30px;" src="${icons[servo[1]]}" data-lat="${servo[4]}" data-lng="${servo[5]}">
             </div>
         </div>
     </a>

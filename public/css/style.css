@@ -89,7 +89,7 @@ aside {
 .nav {
     z-index: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     max-height: 4rem;
     background: rgb(236, 236, 236);
@@ -484,3 +484,16 @@ ul > li:hover {
     padding: 0 8px;
     width: 2.8em;
   }
+
+  #locationBtn {
+    padding: .5rem;
+    border-radius: 20px;
+    border: #50508e solid 2px;
+    margin-bottom: 3px;
+  }
+
+#locationBtn:hover {
+    background-color: white;
+    cursor: pointer;
+}
+

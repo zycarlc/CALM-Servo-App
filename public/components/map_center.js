@@ -1,5 +1,3 @@
-// import axios from "axios"
-
 export function mapCenterInfo (centerLat, centerLng) {
     const mapCenterInfo = document.querySelector('.map-center-info')
     const mapCenterAddress= document.querySelector('.map-center-address')

@@ -1,9 +1,3 @@
-
- 
-
-// import {  fetchServosWithin } from "../servo_api"
-
-
 export function getDistanceFromLatLon(lat1,lon1,lat2,lon2) {
 
     let R = 6371; // Radius of the earth in km

@@ -1,7 +1,3 @@
-// const { default: axios } = require("axios");
-
-
-
 export function spotlight(event){
     if(event){
         event.preventDefault()

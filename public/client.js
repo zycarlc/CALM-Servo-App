@@ -70,8 +70,6 @@ function handleRightCollapse(event) {
     
 }
 
-
-
 // Initialize and add the map
 let map, infoWindow;
 
@@ -80,6 +78,7 @@ let time = document.querySelector('#timeOutput')
 
 // save the markers as a global array
 let markersArray = []
+let searchMarker;
 let searchRadius = 0.1;
 
 // The location of G.A. Sydney
@@ -245,7 +244,6 @@ async function initMap() {
 
 
     function removeMarkers (centerObj) {
-
         let latNE = centerObj.center.lat + centerObj.radius
         let lngNE = centerObj.center.lng + centerObj.radius
         let latSW = centerObj.center.lat - centerObj.radius
@@ -254,8 +252,6 @@ async function initMap() {
         // centerMarker.setMap(null)
 
         markersArray.forEach((mark) => {
-            let lat = mark.getPosition().lat()
-            let lng = mark.getPosition().lng()
             // if (lat > latNE || lat < latSW || lng > lngNE || lng < lngSW) {
                 mark.setMap(null)
             // }
@@ -271,14 +267,6 @@ async function initMap() {
         mapCenterInfo(centerLat, centerLon)
         nearestList(centerLat, centerLon)
     });
-
-    // map.addListener("mouseup", () => {
-    //     fetchServos()
-    // })
-
-    // map.addListener("zoom_changed", () => {
-    //     fetchServos()
-    // })
 
     map.addListener('bounds_changed', function() {
 
@@ -321,6 +309,49 @@ async function initMap() {
 
 }
 
+async function findPlace() {
+    if (searchMarker) {
+        searchMarker.map = null
+    }
+    const request = {
+    query: searchInput.value,
+    fields: ["displayName", "location"],
+    locationBias: { 
+        lat: map.getCenter().lat(),
+        lng: map.getCenter().lng()
+        }
+    };
+    const { places } = await google.maps.places.Place.findPlaceFromQuery(request);
+
+    if (places.length) {
+    const place = places[0];
+    const location = place.location;
+    searchMarker = new google.maps.marker.AdvancedMarkerView({
+        map,
+        position: place.location,
+        title: place.displayName,
+    });
+    
+
+    map.setCenter(location);
+    searchInput.value = ""
+    } else {
+    console.log("No results");
+    }
+}
+
+const searchBtn = document.querySelector("#searchBtn")
+const searchInput = document.querySelector(".searchbar-input")
+searchInput.addEventListener("keypress", findPlaceWithEnterKey)
+searchBtn.addEventListener("click", findPlace)
+
+function findPlaceWithEnterKey(e) {
+    if (e.key === "Enter") {
+        findPlace()
+    }
+}
+
+ 
 // fetch data from db and display in spotlight box
 const spotlightRefresh = document.getElementById("refresh-spot")
 spotlightRefresh.addEventListener("click",spotlight)

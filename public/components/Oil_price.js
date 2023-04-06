@@ -6,7 +6,7 @@ export function getOilPrice(){
     const naturlGas = document.getElementById("naturl-gas")
 
     axios
-        .get("https://commodities-api.com/api/latest?access_key=u1co2u9ekxr0sgfdsjvbga8fp0ricay8cz7lgcfm0zq5zjiqvsjdwsiq5h8m")
+        .get("https://commodities-api.com/api/latest?access_key=g60u39m6lv1039x94j7eyez54j250o4tt7dy91jlm1iwl6xeukvqzwwgih9s")
         .then(res => {
             console.log(res.data)
             oilPriceDate.innerHTML = res.data.data.date

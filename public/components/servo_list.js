@@ -21,15 +21,15 @@ function renderServo (servo) {
     // nearestStations.appendChild
 
     return `
-
-        <div class="station-list">
-            <div class="list-heading-wrapper">
-                <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}  </a>
-                <img style="width:auto;height:30px;" src="../icons/100pix/${servo[1]}.png">
+    <a href class="nearest-station-name" data-lat="${servo[4]}" data-lng="${servo[5]}">
+        <div class="station-list" data-lat="${servo[4]}" data-lng="${servo[5]}">
+            <div class="list-heading-wrapper" data-lat="${servo[4]}" data-lng="${servo[5]}">
+                <p data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[2]}</p>  
+                <img style="width:auto;height:30px;" src="../icons/100pix/${servo[1]}.png" data-lat="${servo[4]}" data-lng="${servo[5]}">
             </div>
-            <p class="distance">${servo[0]}m</p>
-            <p class="address">${servo[3]}</p>
+            <p class="distance" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[0]}m</p>
+            <p class="address" data-lat="${servo[4]}" data-lng="${servo[5]}">${servo[3]}</p>
         </div>
-
+    </a>
     `
 }

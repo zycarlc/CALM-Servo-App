@@ -188,17 +188,17 @@ async function initMap() {
 
     function addMarkers (stationsArray) {
 
-        centerLat = map.getCenter().lat()
-        centerLon = map.getCenter().lng()
-        const centerMarker = new google.maps.Marker({
-            position: { lat: centerLat, lng: centerLon },
-            map,
-            icon: icons["CenterMarker"].icon, 
-            title: ""   
+        // centerLat = map.getCenter().lat()
+        // centerLon = map.getCenter().lng()
+        // const centerMarker = new google.maps.Marker({
+        //     position: { lat: centerLat, lng: centerLon },
+        //     map,
+        //     icon: icons["CenterMarker"].icon, 
+        //     title: ""   
             
-        })
+        // })
 
-        markersArray.push(centerMarker)
+        // markersArray.push(centerMarker)
         
 
         stationsArray.forEach((station) => {   

@@ -194,6 +194,7 @@ async function initMap() {
             position: { lat: centerLat, lng: centerLon },
             map,
             icon: icons["CenterMarker"].icon, 
+            width: 19,
             title: ""   
             
         })

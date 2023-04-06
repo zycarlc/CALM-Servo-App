@@ -160,7 +160,6 @@ section {
     width: 88%;
     align-self: flex-end;
     border-radius: 10px 0 0 10px;
-    background-color: lightgray;
 }
 
 #timeOutput {
@@ -202,7 +201,13 @@ footer {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-.station-list > p {
+.station-card-bottom-half {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.station-card-bottom-half > div  > p {
     margin: 0;
 }
 
@@ -210,10 +215,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.list-heading-wrapper > img {
-    height: 2rem;
+    width: 100%;
 }
 
 .list-heading-wrapper > a {
@@ -485,15 +487,23 @@ ul > li:hover {
     width: 2.8em;
   }
 
-  #locationBtn {
+#locationBtn {
     padding: .5rem;
     border-radius: 20px;
-    border: #50508e solid 2px;
+    border: #50508e81 solid 2px;
     margin-bottom: 3px;
-  }
+    border-width: 1px;
+}
 
 #locationBtn:hover {
     background-color: white;
     cursor: pointer;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    border-color: rgba(223,225,229,0);
 }
 
+.price {
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.2rem;
+}

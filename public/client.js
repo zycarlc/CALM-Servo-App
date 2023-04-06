@@ -81,16 +81,14 @@ let time = document.querySelector('#timeOutput')
 // save the markers as a global array
 let markersArray = []
 let searchRadius = 0.1;
-// let centerMarker = new google.maps.Marker({})
+
+// The location of G.A. Sydney
+const gaPosition = { lat: -36.358334, lng: 146.312500 };
+// User location
+const userPosition = {}
 
 async function initMap() {
-    // The location of G.A. Sydney
-    const gaPosition = { lat: -36.358334, lng: 146.312500 };
-    // User location
-    const userPosition = {}
 
-    // const position = {};
- 
     // Request needed libraries.
     //@ts-ignore
     const { Map } = await google.maps.importLibrary("maps");
@@ -108,34 +106,33 @@ async function initMap() {
     
 
     getUserLocation()
-    .then(res => {
-        if (res.error) {
-            return gaPosition
-        }
-        userPosition.lat = Number(res.lat)
-        userPosition.lng = Number(res.lng)
-        return userPosition
-    })
-    .then(userPosition => {
-        map.setCenter(userPosition)
-        setUserLocationMaker(userPosition)
-    })
-
+        .then(res => {
+            if (res.error) {
+                return gaPosition
+            }
+            userPosition.lat = Number(res.lat)
+            userPosition.lng = Number(res.lng)
+            return userPosition
+        })
+        .then(userPosition => {
+            map.setCenter(userPosition)
+            setUserLocationMaker(userPosition)
+        })
 
     function setUserLocationMaker (userPosition) {
-        infoWindow = new google.maps.InfoWindow();
+        // infoWindow = new google.maps.InfoWindow();
     
-        const locationButton = document.createElement("button");
+        // const locationButton = document.createElement("button");
       
-        locationButton.textContent = "Pan to Current Location";
-        locationButton.classList.add("custom-map-control-button");
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-        locationButton.addEventListener("click", () => {
-            infoWindow.setPosition(userPosition);
-            infoWindow.setContent("Location found.");
-            infoWindow.open(userPosition);
-            map.setCenter(userPosition);
-        })
+        // locationButton.textContent = "Pan to Current Location";
+        // locationButton.classList.add("custom-map-control-button");
+        // map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+        // locationButton.addEventListener("click", () => {
+        //     infoWindow.setPosition(userPosition);
+        //     infoWindow.setContent("Location found.");
+        //     infoWindow.open(userPosition);
+        //     map.setCenter(userPosition);
+        // })
         const userLocationIcon = {
             url: "/icons/Maps-Center-Direction.512.png",
             scaledSize: new google.maps.Size(30, 30),
@@ -155,8 +152,6 @@ async function initMap() {
     getOilPrice()
     spotlight()
   
-    
-
     const icons = {
         "BP": {
           icon: "/icons/100pix/BP.png"
@@ -183,8 +178,6 @@ async function initMap() {
 
     let centerLat = map.getCenter().lat()
     let centerLon = map.getCenter().lng()
-
-    
 
     function addMarkers (stationsArray) {
 
@@ -270,8 +263,6 @@ async function initMap() {
         markersArray = []
     }
 
-
-
     nearestList(centerLat, centerLon)
     
     map.addListener("center_changed", () => {
@@ -341,6 +332,23 @@ spotlightDirect.addEventListener("click", (event) => {
     }
     let coordinate = event.target.dataset
     map.setCenter({lat: Number(coordinate.lat), lng: Number(coordinate.lng)})
+})
+
+// current location button to take you back to the user location
+const currentLocationBtn = document.querySelector("#locationBtn")
+currentLocationBtn.addEventListener("click", ()=>{
+    getUserLocation()
+        .then(res => {
+            if (res.error) {
+                return gaPosition
+            }
+            userPosition.lat = Number(res.lat)
+            userPosition.lng = Number(res.lng)
+            return userPosition
+        })
+        .then(userPosition => {
+            map.setCenter(userPosition)
+        })
 })
 
 // exporting this function so I'm able to pull the setCenter function

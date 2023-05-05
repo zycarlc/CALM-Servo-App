@@ -10,7 +10,7 @@ A full stack group project from 4 students as part of GA's Software Engineering 
 
 **Other technology:** Google Maps & Places API/Commodities-API/Font Awesome
 
-![Screenshot](https://github.com/mountmike/CALM-Servo-App/tree/main/db.jpg)
+![Screenshot](https://github.com/mountmike/CALM-Servo-App/blob/main/planning/screenshot1.png)
 
 # What this project is about
 

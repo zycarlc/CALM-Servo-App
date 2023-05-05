@@ -1,8 +1,16 @@
 # CALM-Servo-App
 
+A full stack group project from 4 students as part of GA's Software Engineering Immersive program. The goal was to make a single page application that you could use to search for petrol stations in your area using **Google Map's API**.
 
-Try it [here] (https://calm-servo-app-wphj.onrender.com/)
+[Check it out!](https://calm-servo-app-wphj.onrender.com/) *(deployed on Render's free tier so may take half a minute for the server to spin up)*
 
+**Backend:** Node.js/Express.js/EJS/
+
+**Frontend:** Vanilla JavaScript/Axios
+
+**Other technology:** Google Maps & Places API/Commodities-API/Font Awesome
+
+![Screenshot](https://github.com/mountmike/CALM-Servo-App/tree/main/db.jpg)
 
 # What this project is about
 
@@ -10,7 +18,7 @@ Try it [here] (https://calm-servo-app-wphj.onrender.com/)
 - also see some prices
 - maybe other things
 
-# Who's in the team
+# Contributors
 
 - Mike: https://github.com/mountmike
 - Leon: https://github.com/Leon-Liang-YU

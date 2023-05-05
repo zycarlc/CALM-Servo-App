@@ -4,11 +4,11 @@ A full stack group project from 4 students as part of GA's Software Engineering 
 
 [Check it out!](https://calm-servo-app-wphj.onrender.com/) *(deployed on Render's free tier so may take half a minute for the server to spin up)*
 
-**Backend:** Node.js/Express.js/EJS
+**Backend:** Node.js/Express.js
 
 **Frontend:** Vanilla JavaScript & Axios
 
-**Other technology:** Google Maps & Places API/Commodities-API/Font Awesome
+**Other technology:** EJS/Google Maps & Places API/Commodities-API/Font Awesome
 
 ![Screenshot](https://github.com/mountmike/CALM-Servo-App/blob/main/planning/screenshot1.png)
 

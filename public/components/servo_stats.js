@@ -3,7 +3,6 @@ import { fetchServoStats } from "../servo_api.js"
 const statsSection = document.querySelector('.stats')
 
 export function renderServoTable(servos) {
-    console.log(servos);
     statsSection.innerHTML = `
         <div class="stats-list">
             <div class="heading-wrapper">
